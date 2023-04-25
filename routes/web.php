@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\front\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,9 +14,15 @@ use App\Http\Controllers\Admin\AdminController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+//Route::get('/', function () {
+//    return view('frontend.frontend_master');
+//});
+Route::controller(HomeController::class)->group(function(){
+    Route::get('/','FrontHome')->name('front_home');
+    Route::get('about','FrontAbout')->name('front_about');
+
 });
+
 
 Route::controller(AdminController::class)->prefix('admin')->group(function(){
     Route::get('login','AdminLogin')->name('admin_login');

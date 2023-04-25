@@ -99,7 +99,7 @@ class AdminController extends Controller
            'name'=>'required',
             'email'=>'required|email'
         ]);
-        if($request->password != ''){
+        if($request->password || $request->retype_password != ''){
             $request->validate([
                'password'=>'required',
                 'retype_password'=>'required|same:password'
