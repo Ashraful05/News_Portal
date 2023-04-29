@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\HomeAdvertisementController;
 use App\Http\Controllers\front\HomeController;
 /*
 |--------------------------------------------------------------------------
@@ -35,4 +36,7 @@ Route::controller(AdminController::class)->prefix('admin')->group(function(){
     Route::post('reset-password-submit','ResetPasswordSubmit')->name('admin_reset_password_submit');
     Route::get('edit-profile','ProfileInfo')->name('admin_profile_edit')->middleware('admin:admin');
     Route::post('update-profile','ProfileInfoUpdate')->name('admin_profile_update');
+});
+Route::controller(HomeAdvertisementController::class)->prefix('admin/advertisement')->group(function(){
+   Route::get('home','HomeAdvertisementShow')->name('home_advertisement')->middleware('admin:admin');
 });
