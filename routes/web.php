@@ -37,6 +37,7 @@ Route::controller(AdminController::class)->prefix('admin')->group(function(){
     Route::get('edit-profile','ProfileInfo')->name('admin_profile_edit')->middleware('admin:admin');
     Route::post('update-profile','ProfileInfoUpdate')->name('admin_profile_update');
 });
-Route::controller(HomeAdvertisementController::class)->prefix('admin/advertisement')->group(function(){
-   Route::get('home','HomeAdvertisementShow')->name('home_advertisement')->middleware('admin:admin');
+Route::controller(HomeAdvertisementController::class)->prefix('admin/advertisement')->middleware('admin:admin')->group(function(){
+   Route::get('home','HomeAdvertisementShow')->name('home_advertisement');
+   Route::post('home-update','HomeAdvertisementUpdate')->name('home_advertisement_update');
 });

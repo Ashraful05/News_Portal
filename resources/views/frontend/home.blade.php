@@ -99,15 +99,22 @@
         </div>
     </div>
 
-    <div class="ad-section-2">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <a href=""><img src="{{ asset('/') }}frontend/assets/uploads/ad-1.png" alt=""></a>
+    @if($homeData->above_search_ad_status == 'show')
+        <div class="ad-section-2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        @if($homeData->above_search_ad_url == '')
+                            <a href="#"><img src="{{ asset('frontend/assets/uploads/'.$homeData->above_search_ad) }}" alt=""></a>
+                        @else
+                            <a href="{{ $homeData->above_search_ad_url }}"><img src="{{ asset('frontend/assets/uploads/'.$homeData->above_search_ad) }}" alt=""></a>
+                        @endif
+                        {{--                        <a href=""><img src="{{ asset($homeData->above_search_ad) }}" alt=""></a>--}}
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    @endif
 
     <div class="search-section">
         <div class="container">
@@ -916,15 +923,20 @@
     </div>
 
 
-
-    <div class="ad-section-3">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <a href=""><img src="{{ asset('/') }}frontend/assets/uploads/ad-1.png" alt=""></a>
+    @if($homeData->above_footer_ad_status == 'show')
+        <div class="ad-section-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        {{--                        <a href=""><img src="{{ asset($homeData->above_footer_ad) }}" alt=""></a>--}}
+                        @if($homeData->above_footer_ad_url == '')
+                            <a href=""><img src="{{ asset('frontend/assets/uploads/'.$homeData->above_footer_ad) }}" alt=""></a>
+                        @else
+                            <a href="{{ $homeData->above_footer_ad_url }}"><img src="{{ asset('frontend/assets/uploads/'.$homeData->above_footer_ad) }}" alt=""></a>
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-
+    @endif
 @endsection

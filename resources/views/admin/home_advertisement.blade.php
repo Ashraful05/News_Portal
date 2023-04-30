@@ -3,7 +3,7 @@
 @section('heading','Home Advertisements')
 @section('main_content')
     <div class="section-body">
-        <form action="" method="post" enctype="multipart/form-data">
+        <form action="{{ route('home_advertisement_update') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="row">
                 <div class="col-6">
@@ -66,7 +66,7 @@
                             </div>
                             <div class="form-group mb-3">
                                 <label for="">Status</label>
-                                <select name="above_search_ad_status" class="form-control">
+                                <select name="above_footer_ad_status" class="form-control">
                                     <option value="show" @if($homeAddData->above_footer_ad_status == 'show') selected @endif>Show</option>
                                     <option value="hide" @if($homeAddData->above_footer_ad_status == 'hide') selected @endif>Hide</option>
                                 </select>
