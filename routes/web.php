@@ -40,4 +40,6 @@ Route::controller(AdminController::class)->prefix('admin')->group(function(){
 Route::controller(HomeAdvertisementController::class)->prefix('admin/advertisement')->middleware('admin:admin')->group(function(){
    Route::get('home','HomeAdvertisementShow')->name('home_advertisement');
    Route::post('home-update','HomeAdvertisementUpdate')->name('home_advertisement_update');
+   Route::get('top','TopAdvertisementShow')->name('top_advertisement');
+   Route::post('top-update','TopAdvertisementUpdate')->name('top_advertisement_update');
 });

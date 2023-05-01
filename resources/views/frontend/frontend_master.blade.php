@@ -7,9 +7,9 @@
     <meta name="description" content="">
     <title>@yield('title')</title>
 
-    @include('frontend.layout.styles')
+@include('frontend.layout.styles')
 
-    <!-- All Javascripts -->
+<!-- All Javascripts -->
     @include('frontend.layout.scripts')
 
     <link href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -68,9 +68,15 @@
                 </div>
             </div>
             <div class="col-md-8">
-                <div class="ad-section-1">
-                    <a href=""><img src="{{ asset('/') }}frontend/assets/uploads/ad-1.png" alt=""></a>
-                </div>
+                @if($global_top_add_data->top_search_ad_status == 'show')
+                    <div class="ad-section-1">
+                        @if($global_top_add_data->top_search_ad_url=='')
+                            <img src="{{ asset('frontend/assets/uploads/'.$global_top_add_data->top_search_ad) }}" alt="">
+                        @else
+                            <a href="{{ $global_top_add_data->top_search_ad_url }}"><img src="{{ asset('frontend/assets/uploads/'.$global_top_add_data->top_search_ad) }}" alt=""></a>
+                        @endif
+                    </div>
+                @endif
             </div>
         </div>
     </div>
