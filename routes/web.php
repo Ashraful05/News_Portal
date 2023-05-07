@@ -42,4 +42,10 @@ Route::controller(HomeAdvertisementController::class)->prefix('admin/advertiseme
    Route::post('home-update','HomeAdvertisementUpdate')->name('home_advertisement_update');
    Route::get('top','TopAdvertisementShow')->name('top_advertisement');
    Route::post('top-update','TopAdvertisementUpdate')->name('top_advertisement_update');
+   Route::get('sidebar','SidebarAdvertisementShow')->name('sidebar_advertisement_view');
+   Route::get('sidebar-create','SidebarAdvertisementCreate')->name('sidebar_advertisement_create');
+   Route::post('sidebar-save','SidebarAdvertisementSave')->name('sidebar_advertisement_save');
+   Route::get('sidebar-edit/{id}','SidebarAdvertisementEdit')->name('sidebar_advertisement_edit');
+   Route::post('sidebar-update/{id}','SidebarAdvertisementUpdate')->name('sidebar_advertisement_update');
+   Route::get('sidebar-delete/{id}','SidebarAdvertisementDelete')->name('sidebar_advertisement_delete');
 });
