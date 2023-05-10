@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\HomeAdvertisementController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\front\HomeController;
 /*
 |--------------------------------------------------------------------------
@@ -48,4 +49,12 @@ Route::controller(HomeAdvertisementController::class)->prefix('admin/advertiseme
    Route::get('sidebar-edit/{id}','SidebarAdvertisementEdit')->name('sidebar_advertisement_edit');
    Route::post('sidebar-update/{id}','SidebarAdvertisementUpdate')->name('sidebar_advertisement_update');
    Route::get('sidebar-delete/{id}','SidebarAdvertisementDelete')->name('sidebar_advertisement_delete');
+});
+Route::controller(CategoryController::class)->prefix('admin/category')->middleware('admin:admin')->group(function(){
+   Route::get('show','CategoryShow')->name('admin_category_show');
+   Route::get('create','CategoryCreate')->name('admin_category_create');
+   Route::post('save','CategorySave')->name('admin_category_save');
+   Route::get('edit/{id}','CategoryEdit')->name('admin_category_edit');
+   Route::post('update/{id}','CategoryUpdate')->name('admin_category_update');
+   Route::get('delete/{id}','CategoryDelete')->name('admin_category_delete');
 });
