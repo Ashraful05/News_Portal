@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\HomeAdvertisementController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\front\HomeController;
 /*
 |--------------------------------------------------------------------------
@@ -58,3 +59,4 @@ Route::controller(CategoryController::class)->prefix('admin/category')->middlewa
    Route::post('update/{id}','CategoryUpdate')->name('admin_category_update');
    Route::get('delete/{id}','CategoryDelete')->name('admin_category_delete');
 });
+Route::resource('admin/subcategory',SubCategoryController::class)->middleware('admin:admin');
