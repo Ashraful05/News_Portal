@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\HomeAdvertisementController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SubCategoryController;
+use App\Http\Controllers\Admin\NewsPostsController;
 use App\Http\Controllers\front\HomeController;
 /*
 |--------------------------------------------------------------------------
@@ -60,3 +61,5 @@ Route::controller(CategoryController::class)->prefix('admin/category')->middlewa
    Route::get('delete/{id}','CategoryDelete')->name('admin_category_delete');
 });
 Route::resource('admin/subcategory',SubCategoryController::class)->middleware('admin:admin');
+Route::resource('admin/newspost',NewsPostsController::class)->middleware('admin:admin');
+Route::get('admin/newspost/delete_tag/{id}/{id1}',[NewsPostsController::class,'AdminNewsPostTagDelete'])->name('admin_newspost_delete_tag');
