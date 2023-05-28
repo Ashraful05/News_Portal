@@ -187,14 +187,17 @@ class NewsPostsController extends Controller
     public function destroy(NewsPosts $newspost)
     {
 //        return $newspost;
-        if($newspost->post_photo){
-            unlink(public_path('uploads/'.$newspost->post_photo));
+        if(empty($newspost->post_photo)){
             $newspost->delete();
+            Tag::where('post_id',$newspost->id)->delete();
         }else{
+            unlink('uploads/'.$newspost->post_photo);
             $newspost->delete();
+            Tag::where('post_id',$newspost->id)->delete();
         }
         return redirect()->back()->with('error','NewsPost data deleted!!');
     }
+
     public function AdminNewsPostTagDelete($id,$id1)
     {
         Tag::findOrFail($id)->delete();

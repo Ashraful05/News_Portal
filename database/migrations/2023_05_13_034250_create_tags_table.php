@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('tags', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('post_id')->unsigned()->index();
-            $table->foreign('post_id')->references('id')->on('news_posts');
+            $table->foreign('post_id')->references('id')->on('news_posts')->onDelete('cascade');
             $table->string('tag_name');
             $table->timestamps();
         });
