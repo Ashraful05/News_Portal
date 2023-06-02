@@ -12,6 +12,9 @@
             <li class="{{ Request::is('admin/home')?'active':'' }}">
                 <a class="nav-link" href="{{ route('admin_home') }}"><i class="fas fa-hand-point-right"></i> <span>Dashboard</span></a>
             </li>
+            <li class="{{ Request::is('admin/settings')?'active':'' }}">
+                <a class="nav-link" href="{{ route('admin_settings') }}"><i class="fas fa-hand-point-right"></i> <span>Settings</span></a>
+            </li>
 
             <li class="nav-item dropdown {{ Request::is('admin/advertisement/top')||Request::is('admin/advertisement/home')||Request::is('admin/advertisement/sidebar-*') ?'active':'' }}">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-hand-point-right"></i><span>Advertisements</span></a>

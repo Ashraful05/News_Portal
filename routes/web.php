@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\NewsPostsController;
 use App\Http\Controllers\front\HomeController;
+use App\Http\Controllers\Admin\AdminSettingsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -63,3 +64,6 @@ Route::controller(CategoryController::class)->prefix('admin/category')->middlewa
 Route::resource('admin/subcategory',SubCategoryController::class)->middleware('admin:admin');
 Route::resource('admin/newspost',NewsPostsController::class)->middleware('admin:admin');
 Route::get('admin/newspost/delete_tag/{id}/{id1}',[NewsPostsController::class,'AdminNewsPostTagDelete'])->name('admin_newspost_delete_tag');
+
+Route::get('admin/settings',[AdminSettingsController::class,'adminSettings'])->name('admin_settings')->middleware('admin:admin');
+Route::post('admin/settings/update',[AdminSettingsController::class,'adminSettingsUpdate'])->name('admin_setting_update');

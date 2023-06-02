@@ -70,19 +70,21 @@ class NewsPostsController extends Controller
             'post_photo'=>$finalName,
         ]);
 
-        $tagsArray = explode(',',$request->tags);
-        $tagsArrayUnique = [];//this array variable is to prevent duplicate values
-        for($i=0;$i<count($tagsArray);$i++)
-        {
-            $tagsArrayUnique[]=trim($tagsArray[$i]);
-        }
-        $tagsArrayUnique = array_values(array_unique($tagsArrayUnique));
-        for($i=0;$i<count($tagsArrayUnique);$i++)
-        {
-            Tag::create([
-               'post_id'=>$autoIncrementId,
-                'tag_name'=>trim($tagsArrayUnique[$i])
-            ]);
+        if($request->tags != ''){
+            $tagsArray = explode(',',$request->tags);
+            $tagsArrayUnique = [];//this array variable is to prevent duplicate values
+            for($i=0;$i<count($tagsArray);$i++)
+            {
+                $tagsArrayUnique[]=trim($tagsArray[$i]);
+            }
+            $tagsArrayUnique = array_values(array_unique($tagsArrayUnique));
+            for($i=0;$i<count($tagsArrayUnique);$i++)
+            {
+                Tag::create([
+                    'post_id'=>$autoIncrementId,
+                    'tag_name'=>trim($tagsArrayUnique[$i])
+                ]);
+            }
         }
 
         return redirect()->route('newspost.index')->with('success','Post Info Saved Successfully!');

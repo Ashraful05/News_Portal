@@ -1,26 +1,37 @@
 @extends('frontend.frontend_master')
 @section('title','Home')
 @section('main_content')
-    <div class="news-ticker-item">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="acme-news-ticker">
-                        <div class="acme-news-ticker-label">Latest News</div>
-                        <div class="acme-news-ticker-box">
-                            <ul class="my-news-ticker">
-                                <li><a href="">Helicopter crashes into waves off crowded Miami beach</a></li>
-                                <li><a href="">Canadian police appear to end protesters' siege of Ottawa</a></li>
-                                <li><a href="">Speedskating champ chooses sportsmanship over Olympic medal</a></li>
-                                <li><a href="">USDA head: US farmers to help if Ukraine exports threatened</a></li>
-                                <li><a href="">Actor Lindsey Pearlman found dead after going missing in LA</a></li>
-                            </ul>
+
+    @if($settingData->news_ticker_status == 'show')
+        <div class="news-ticker-item">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="acme-news-ticker">
+                            <div class="acme-news-ticker-label">Latest News</div>
+                            <div class="acme-news-ticker-box">
+                                <ul class="my-news-ticker">
+                                    @php $i=0; @endphp
+                                    @foreach($postData as $data)
+                                        @php $i++; @endphp
+                                        @if($i>$settingData->news_ticker_total)
+                                            break;
+                                        @endif
+                                        <li><a href="">{{ $data->post_title }}</a></li>
+                                    @endforeach
+
+{{--                                    <li><a href="">Canadian police appear to end protesters' siege of Ottawa</a></li>--}}
+{{--                                    <li><a href="">Speedskating champ chooses sportsmanship over Olympic medal</a></li>--}}
+{{--                                    <li><a href="">USDA head: US farmers to help if Ukraine exports threatened</a></li>--}}
+{{--                                    <li><a href="">Actor Lindsey Pearlman found dead after going missing in LA</a></li>--}}
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    @endif
 
     <div class="home-main">
         <div class="container">
