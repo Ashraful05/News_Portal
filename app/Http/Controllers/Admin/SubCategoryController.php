@@ -50,6 +50,7 @@ class SubCategoryController extends Controller
         SubCategory::create([
            'sub_category_name'=>$request->sub_category_name,
             'show_on_menu'=>$request->show_on_menu,
+            'show_on_home_page'=>$request->show_on_home_page,
             'sub_category_order'=>$request->sub_category_order,
             'category_id'=>$request->category_id
         ]);
@@ -100,6 +101,7 @@ class SubCategoryController extends Controller
         $subcategory->update([
             'sub_category_name'=>$request->sub_category_name,
             'show_on_menu'=>$request->show_on_menu,
+            'show_on_home_page'=>$request->show_on_home_page,
             'sub_category_order'=>$request->sub_category_order,
             'category_id'=>$request->category_id
         ]);

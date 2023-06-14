@@ -45,7 +45,7 @@
                                         <div class="form-group mb-3">
                                             <label>Post Details</label>
                                             <div>
-                                                <textarea name="post_detail" id="" cols="30" rows="10" class="form-control snote" >{{ old('post_detail',$newspost->post_detail) }}</textarea>
+                                                <textarea name="post_detail" id="" cols="30" rows="10" class="form-control snote" >{!! old('post_detail',$newspost->post_detail) !!}  </textarea>
                                             </div>
                                         </div>
                                         @if($newspost->exists)

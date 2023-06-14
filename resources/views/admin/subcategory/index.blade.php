@@ -19,6 +19,7 @@
                                     <th>SubCategory Name</th>
                                     <th>SubCategory Order</th>
                                     <th>Show On Menu</th>
+                                    <th>Show On Home Page</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -30,6 +31,7 @@
                                         <td>{{ $data->sub_category_name }}</td>
                                         <td>{{ $data->sub_category_order }}</td>
                                         <td>{{ $data->show_on_menu }}</td>
+                                        <td>{{ $data->show_on_home_page }}</td>
                                         <td class="pt_10 pb_10">
                                             <a href="{{ route('subcategory.edit',$data->id) }}" class="btn btn-primary" title="Edit Data"><i class="fas fa-edit"></i></a>
                                             <form action="{{ route('subcategory.destroy',$data->id) }}" method="post">

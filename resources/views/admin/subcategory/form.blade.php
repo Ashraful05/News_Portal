@@ -57,8 +57,25 @@
                                                 </select>
                                             </div>
                                         @endif
+                                        @if($subcategory->exists)
+                                            <div class="form-group mb-3">
+                                                <label>Show On Home Page?</label>
+                                                <select name="show_on_home_page" class="form-control">
+                                                    <option value="show" @if($subcategory->show_on_home_page=='show') selected @endif>Show</option>
+                                                    <option value="hide" @if($subcategory->show_on_home_page=='hide')  selected @endif>Hide</option>
+                                                </select>
+                                            </div>
+                                        @else
+                                            <div class="form-group mb-3">
+                                                <label>Show On Home Page?</label>
+                                                <select name="show_on_home_page" class="form-control">
+                                                    <option value="show">Show</option>
+                                                    <option value="hide">Hide</option>
+                                                </select>
+                                            </div>
+                                        @endif
 
-                                        <div class="form-group mb-3">
+                                        <div class="form-group mb-1">
                                             <label>SubCategory Order</label>
                                             <div>
                                                 <input type="text" name="sub_category_order" value="{{ old('sub_category_order',$subcategory->sub_category_order) }}" class="form-control">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin;
 use App\Models\NewsPosts;
 use App\Models\SubCategory;
 use App\Models\Tag;
@@ -98,7 +99,14 @@ class NewsPostsController extends Controller
      */
     public function show($id)
     {
-        //
+        $tagData = Tag::where('post_id',$id)->get();
+        $postDetail = NewsPosts::with('rSubCategory')->where('id',$id)->first();
+        if($postDetail->author_id == 0){
+           $userData = Admin::where('id',$postDetail->admin_id)->first();
+        }else{
+
+        }
+        return view('frontend.news_post_details');
     }
 
     /**
