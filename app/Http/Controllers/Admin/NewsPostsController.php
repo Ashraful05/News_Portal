@@ -213,4 +213,5 @@ class NewsPostsController extends Controller
         Tag::findOrFail($id)->delete();
         return redirect()->route('newspost.edit',$id1)->with('error','Tag Info is deleted!!');
     }
+
 }

@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\NewsPostsController;
 use App\Http\Controllers\front\HomeController;
+use App\Http\Controllers\front\PostController;
 use App\Http\Controllers\Admin\AdminSettingsController;
 /*
 |--------------------------------------------------------------------------
@@ -22,13 +23,17 @@ use App\Http\Controllers\Admin\AdminSettingsController;
 //Route::get('/', function () {
 //    return view('frontend.frontend_master');
 //});
+// Frontend routes.,,,,,,,,,
 Route::controller(HomeController::class)->group(function(){
     Route::get('/','FrontHome')->name('front_home');
     Route::get('about','FrontAbout')->name('front_about');
-
+});
+Route::controller(PostController::class)->group(function(){
+   Route::get('news-details/{id}','NewsDetails')->name('news_details');
 });
 
 
+//admin routes.........
 Route::controller(AdminController::class)->prefix('admin')->group(function(){
     Route::get('login','AdminLogin')->name('admin_login');
     Route::post('login-submit','AdminLoginSubmit')->name('admin_login_submit');

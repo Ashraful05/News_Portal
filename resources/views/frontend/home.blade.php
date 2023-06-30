@@ -15,9 +15,9 @@
                                     @foreach($postData as $data)
                                         @php $i++; @endphp
                                         @if($i>$settingData->news_ticker_total)
-                                            break;
+                                            @break;
                                         @endif
-                                        <li><a href="">{{ $data->post_title }}</a></li>
+                                        <li><a href="{{ route('news_details',$data->id) }}">{{ $data->post_title }}</a></li>
                                     @endforeach
 
                                     {{--                                    <li><a href="">Canadian police appear to end protesters' siege of Ottawa</a></li>--}}
