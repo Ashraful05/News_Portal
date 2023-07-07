@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\SidebarAdvertisement;
 use App\Models\TopAdvertisement;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -25,6 +26,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Paginator::useBootstrap();
+
         $topAddData = TopAdvertisement::where('id',1)->first();
         $sidebarTopAd = SidebarAdvertisement::where('sidebar_ad_location','top')->get();
         $sidebarBottomAd = SidebarAdvertisement::where('sidebar_ad_location','bottom')->get();

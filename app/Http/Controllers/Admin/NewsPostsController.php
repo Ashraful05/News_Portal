@@ -106,7 +106,8 @@ class NewsPostsController extends Controller
         }else{
 
         }
-        return view('frontend.news_post_details');
+//        return view('frontend.news_post_details');
+        return view('frontend.news_detail');
     }
 
     /**

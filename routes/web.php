@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\NewsPostsController;
 use App\Http\Controllers\front\HomeController;
 use App\Http\Controllers\front\PostController;
+use App\Http\Controllers\front\FrontSubCategoryController;
 use App\Http\Controllers\Admin\AdminSettingsController;
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,8 @@ use App\Http\Controllers\Admin\AdminSettingsController;
 //Route::get('/', function () {
 //    return view('frontend.frontend_master');
 //});
+
+
 // Frontend routes.,,,,,,,,,
 Route::controller(HomeController::class)->group(function(){
     Route::get('/','FrontHome')->name('front_home');
@@ -30,6 +33,9 @@ Route::controller(HomeController::class)->group(function(){
 });
 Route::controller(PostController::class)->group(function(){
    Route::get('news-details/{id}','NewsDetails')->name('news_details');
+});
+Route::controller(FrontSubCategoryController::class)->group(function(){
+    Route::get('category/{id}','index')->name('category');
 });
 
 
