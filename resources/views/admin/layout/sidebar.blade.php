@@ -32,6 +32,9 @@
                     <li class="{{ Request::is('admin/newspost')||Request::is('admin/newspost/*')?'active':'' }}"><a class="nav-link" href="{{ route('newspost.index') }}"><i class="fas fa-angle-right"></i>Posts</a></li>
                 </ul>
             </li>
+            <li class="{{ Request::is('admin/photo')?'active':'' }}">
+                <a class="nav-link" href="{{ route('photo.index') }}"><i class="fas fa-hand-point-right"></i> <span>Photo Gallery</span></a>
+            </li>
 
 
 {{--            <li class="nav-item dropdown active">--}}

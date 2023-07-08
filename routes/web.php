@@ -9,7 +9,9 @@ use App\Http\Controllers\Admin\NewsPostsController;
 use App\Http\Controllers\front\HomeController;
 use App\Http\Controllers\front\PostController;
 use App\Http\Controllers\front\FrontSubCategoryController;
+use App\Http\Controllers\front\FrontPhotoController;
 use App\Http\Controllers\Admin\AdminSettingsController;
+use App\Http\Controllers\Admin\AdminPhotoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,6 +38,9 @@ Route::controller(PostController::class)->group(function(){
 });
 Route::controller(FrontSubCategoryController::class)->group(function(){
     Route::get('category/{id}','index')->name('category');
+});
+Route::controller(FrontPhotoController::class)->group(function(){
+   Route::get('photo/gallery','photoGallery')->name('photo_gallery');
 });
 
 
@@ -75,6 +80,7 @@ Route::controller(CategoryController::class)->prefix('admin/category')->middlewa
 Route::resource('admin/subcategory',SubCategoryController::class)->middleware('admin:admin');
 Route::resource('admin/newspost',NewsPostsController::class)->middleware('admin:admin');
 Route::get('admin/newspost/delete_tag/{id}/{id1}',[NewsPostsController::class,'AdminNewsPostTagDelete'])->name('admin_newspost_delete_tag');
+Route::resource('admin/photo',AdminPhotoController::class)->middleware('admin:admin');
 
 Route::get('admin/settings',[AdminSettingsController::class,'adminSettings'])->name('admin_settings')->middleware('admin:admin');
 Route::post('admin/settings/update',[AdminSettingsController::class,'adminSettingsUpdate'])->name('admin_setting_update');
