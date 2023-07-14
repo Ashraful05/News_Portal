@@ -38,6 +38,17 @@
                                                     <option value="hide" @if($setting->news_ticker_status == 'hide') selected @endif>Hide</option>
                                                 </select>
                                             </div>
+                                            <div class="form-group mb-3">
+                                                <label>Video Item Total *</label>
+                                                <input type="text" class="form-control" name="video_total" value="{{ $setting->video_total }}">
+                                            </div>
+                                            <div class="form-group mb-3">
+                                                <label>Video Item Status</label>
+                                                <select name="video_status" class="form-control">
+                                                    <option value="show" @if($setting->video_status == 'show') selected @endif>Show</option>
+                                                    <option value="hide" @if($setting->video_status == 'hide') selected @endif>Hide</option>
+                                                </select>
+                                            </div>
                                             <!-- Home Page End -->
                                         </div>
 

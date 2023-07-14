@@ -7,6 +7,7 @@ use App\Models\HomeAdvertisement;
 use App\Models\NewsPosts;
 use App\Models\Setting;
 use App\Models\SubCategory;
+use App\Models\Video;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -17,7 +18,8 @@ class HomeController extends Controller
         $settingData = Setting::where('id',1)->first();
         $postData = NewsPosts::with('rSubCategory')->orderBy('id','desc')->get();
         $subCategoryData = SubCategory::with('rPost')->orderBy('sub_category_order','asc')->where('show_on_home_page','show')->get();
-        return view('frontend.home',compact('homeData','settingData','postData','subCategoryData'));
+        $homeVideo = Video::get();
+        return view('frontend.home',compact('homeData','settingData','postData','subCategoryData','homeVideo'));
     }
     public function FrontAbout()
     {

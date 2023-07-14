@@ -10,8 +10,10 @@ use App\Http\Controllers\front\HomeController;
 use App\Http\Controllers\front\PostController;
 use App\Http\Controllers\front\FrontSubCategoryController;
 use App\Http\Controllers\front\FrontPhotoController;
+use App\Http\Controllers\front\FrontVideoController;
 use App\Http\Controllers\Admin\AdminSettingsController;
 use App\Http\Controllers\Admin\AdminPhotoController;
+use App\Http\Controllers\Admin\AdminVideoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,6 +43,9 @@ Route::controller(FrontSubCategoryController::class)->group(function(){
 });
 Route::controller(FrontPhotoController::class)->group(function(){
    Route::get('photo/gallery','photoGallery')->name('photo_gallery');
+});
+Route::controller(FrontVideoController::class)->group(function(){
+   Route::get('video/gallery','videoGallery')->name('video_gallery');
 });
 
 
@@ -81,6 +86,7 @@ Route::resource('admin/subcategory',SubCategoryController::class)->middleware('a
 Route::resource('admin/newspost',NewsPostsController::class)->middleware('admin:admin');
 Route::get('admin/newspost/delete_tag/{id}/{id1}',[NewsPostsController::class,'AdminNewsPostTagDelete'])->name('admin_newspost_delete_tag');
 Route::resource('admin/photo',AdminPhotoController::class)->middleware('admin:admin');
+Route::resource('admin/video',AdminVideoController::class)->middleware('admin:admin');
 
 Route::get('admin/settings',[AdminSettingsController::class,'adminSettings'])->name('admin_settings')->middleware('admin:admin');
 Route::post('admin/settings/update',[AdminSettingsController::class,'adminSettingsUpdate'])->name('admin_setting_update');
