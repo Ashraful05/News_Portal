@@ -24,38 +24,43 @@
 
                     <div class="category-page">
                         <div class="row">
-                            @foreach($postData as $data)
-                            <div class="col-lg-6 col-md-12">
-                                <div class="category-page-post-item">
-                                    <div class="photo">
-                                        <img src="{{ asset('uploads/'.$data->post_photo) }}" alt="">
-                                    </div>
-                                    <div class="category">
-                                        <span class="badge bg-success">{{ $data->rSubCategory->sub_category_name }}</span>
-                                    </div>
-                                    <h3><a href="{{ route('news_details',$data->id) }}">{{ $data->post_title }}</a></h3>
-                                    <div class="date-user">
-                                        <div class="user">
-                                            @if($data->author_id == 0)
-                                                @php
-                                                    $userData = \App\Models\Admin::where('id',$data->admin_id)->first();
-                                                @endphp
-                                            @else
+                            @if(count($postData))
+                                @foreach($postData as $data)
+                                    <div class="col-lg-6 col-md-12">
+                                        <div class="category-page-post-item">
+                                            <div class="photo">
+                                                <img src="{{ asset('uploads/'.$data->post_photo) }}" alt="">
+                                            </div>
+                                            <div class="category">
+                                                <span class="badge bg-success">{{ $data->rSubCategory->sub_category_name }}</span>
+                                            </div>
+                                            <h3><a href="{{ route('news_details',$data->id) }}">{{ $data->post_title }}</a></h3>
+                                            <div class="date-user">
+                                                <div class="user">
+                                                    @if($data->author_id == 0)
+                                                        @php
+                                                            $userData = \App\Models\Admin::where('id',$data->admin_id)->first();
+                                                        @endphp
+                                                    @else
 
-                                            @endif
-                                            <a href="">{{ $userData->name }}</a>
-                                        </div>
-                                        <div class="date">
-                                            @php
-                                                $ts = strtotime($data->updated_at);
-                                                $updated_date = date('d F,Y',$ts);
-                                            @endphp
-                                            <a href="">{{ $updated_date }}</a>
+                                                    @endif
+                                                    <a href="">{{ $userData->name }}</a>
+                                                </div>
+                                                <div class="date">
+                                                    @php
+                                                        $ts = strtotime($data->updated_at);
+                                                        $updated_date = date('d F,Y',$ts);
+                                                    @endphp
+                                                    <a href="">{{ $updated_date }}</a>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            @endforeach
+                                @endforeach
+                            @else
+                                <span class="text-danger">No related post found!!</span>
+                            @endif
+
 
                             <div class="col-md-12">
                                 <nav aria-label="Page navigation example">
