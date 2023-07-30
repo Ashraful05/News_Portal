@@ -11,9 +11,11 @@ use App\Http\Controllers\front\PostController;
 use App\Http\Controllers\front\FrontSubCategoryController;
 use App\Http\Controllers\front\FrontPhotoController;
 use App\Http\Controllers\front\FrontVideoController;
+use App\Http\Controllers\front\FrontPageController;
 use App\Http\Controllers\Admin\AdminSettingsController;
 use App\Http\Controllers\Admin\AdminPhotoController;
 use App\Http\Controllers\Admin\AdminVideoController;
+use App\Http\Controllers\Admin\AdminPageController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -46,6 +48,9 @@ Route::controller(FrontPhotoController::class)->group(function(){
 });
 Route::controller(FrontVideoController::class)->group(function(){
    Route::get('video/gallery','videoGallery')->name('video_gallery');
+});
+Route::controller(FrontPageController::class)->group(function(){
+   Route::get('about','aboutPage')->name('front_about');
 });
 
 
@@ -82,6 +87,7 @@ Route::controller(CategoryController::class)->prefix('admin/category')->middlewa
    Route::post('update/{id}','CategoryUpdate')->name('admin_category_update');
    Route::get('delete/{id}','CategoryDelete')->name('admin_category_delete');
 });
+
 Route::resource('admin/subcategory',SubCategoryController::class)->middleware('admin:admin');
 Route::resource('admin/newspost',NewsPostsController::class)->middleware('admin:admin');
 Route::get('admin/newspost/delete_tag/{id}/{id1}',[NewsPostsController::class,'AdminNewsPostTagDelete'])->name('admin_newspost_delete_tag');
@@ -90,3 +96,8 @@ Route::resource('admin/video',AdminVideoController::class)->middleware('admin:ad
 
 Route::get('admin/settings',[AdminSettingsController::class,'adminSettings'])->name('admin_settings')->middleware('admin:admin');
 Route::post('admin/settings/update',[AdminSettingsController::class,'adminSettingsUpdate'])->name('admin_setting_update');
+
+Route::controller(AdminPageController::class)->prefix('admin/page')->middleware('admin:admin')->group(function(){
+   Route::get('about','editAboutPage')->name('edit_about_page');
+   Route::post('update','updateAboutPage')->name('update_about_page');
+});
