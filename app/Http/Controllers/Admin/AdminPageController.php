@@ -44,5 +44,23 @@ class AdminPageController extends Controller
         ]);
         return redirect()->back()->with('success','Page Data Updated');
     }
+    public function editTermsPage()
+    {
+        $data = Page::where('id',1)->first();
+        return view('admin.pages.terms_page',compact('data'));
+    }
+    public function updateTermsPage(Request $request)
+    {
+        $request->validate([
+            'terms_title'=>'required',
+//            'faq_detail'=>'required',
+        ]);
+        Page::where('id',1)->update([
+            'terms_title'=>$request->terms_title,
+            'terms_detail'=>$request->terms_detail,
+            'terms_status'=>$request->terms_status
+        ]);
+        return redirect()->back()->with('success','Terms Data Updated');
+    }
 
 }

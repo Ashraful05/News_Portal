@@ -52,6 +52,7 @@ Route::controller(FrontVideoController::class)->group(function(){
 Route::controller(FrontPageController::class)->group(function(){
    Route::get('about','aboutPage')->name('front_about');
    Route::get('faq','faqPage')->name('front_faq');
+   Route::get('terms','termsPage')->name('front_terms');
 });
 
 
@@ -103,4 +104,6 @@ Route::controller(AdminPageController::class)->prefix('admin/page')->middleware(
    Route::post('about/update','updateAboutPage')->name('update_about_page');
    Route::get('faq','editFAQPage')->name('edit_faq_page');
    Route::post('faq/update','updateFAQPage')->name('update_faq_page');
+   Route::get('terms','editTermsPage')->name('edit_terms_page');
+   Route::post('terms/update','updateTermsPage')->name('update_terms_page');
 });

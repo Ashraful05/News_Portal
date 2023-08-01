@@ -45,7 +45,7 @@
                     <li class="{{ Request::is('admin/page/faq')?'active':'' }}"><a class="nav-link" href="{{ route('edit_faq_page') }}"><i class="fas fa-angle-right"></i>FAQ</a></li>
                     <li class=""><a class="nav-link" href="#"><i class="fas fa-angle-right"></i>Contact</a></li>
                     <li class=""><a class="nav-link" href="#"><i class="fas fa-angle-right"></i>Login</a></li>
-                    <li class=""><a class="nav-link" href="#"><i class="fas fa-angle-right"></i>Terms & Conditions</a></li>
+                    <li class="{{ Request::is('admin/page/terms')?'active':'' }}"><a class="nav-link" href="{{ route('edit_terms_page') }}"><i class="fas fa-angle-right"></i>Terms & Conditions</a></li>
                     <li class=""><a class="nav-link" href="#"><i class="fas fa-angle-right"></i>Privacy Policy</a></li>
                     <li class=""><a class="nav-link" href="#"><i class="fas fa-angle-right"></i>Disclaimer</a></li>
                 </ul>

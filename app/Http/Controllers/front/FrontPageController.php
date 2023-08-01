@@ -18,5 +18,11 @@ class FrontPageController extends Controller
         $pageData = Page::where('id',1)->first();
         return view('frontend.faq',compact('pageData'));
     }
+    public function termsPage()
+    {
+        $pageData = Page::where('id',1)->first();
+        return view('frontend.terms',compact('pageData'));
+    }
+
 
 }
