@@ -38,9 +38,11 @@
             </div>
             <div class="col-md-6">
                 <ul class="right">
-                    <li class="menu"><a href="faq.html">FAQ</a></li>
+                    @if($global_pages->faq_status == 'show')
+                        <li class="menu"><a href="{{ route('front_faq') }}">FAQ</a></li>
+                    @endif
                     @if($global_pages->about_status == 'show')
-                    <li class="menu"><a href="{{ route('front_about') }}">About</a></li>
+                        <li class="menu"><a href="{{ route('front_about') }}">About</a></li>
                     @endif
                     <li class="menu"><a href="contact.html">Contact</a></li>
                     <li class="menu"><a href="login.html">Login</a></li>

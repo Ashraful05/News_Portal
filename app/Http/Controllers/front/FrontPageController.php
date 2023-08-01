@@ -13,4 +13,10 @@ class FrontPageController extends Controller
         $pageData = Page::where('id',1)->first();
         return view('frontend.about',compact('pageData'));
     }
+    public function faqPage()
+    {
+        $pageData = Page::where('id',1)->first();
+        return view('frontend.faq',compact('pageData'));
+    }
+
 }

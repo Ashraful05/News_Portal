@@ -42,7 +42,7 @@
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-hand-point-right"></i><span>Pages</span></a>
                 <ul class="dropdown-menu">
                     <li class="{{ Request::is('admin/page/about')?'active':'' }}"><a class="nav-link" href="{{ route('edit_about_page') }}"><i class="fas fa-angle-right"></i>Edit About</a></li>
-                    <li class=""><a class="nav-link" href="#"><i class="fas fa-angle-right"></i>FAQ</a></li>
+                    <li class="{{ Request::is('admin/page/faq')?'active':'' }}"><a class="nav-link" href="{{ route('edit_faq_page') }}"><i class="fas fa-angle-right"></i>FAQ</a></li>
                     <li class=""><a class="nav-link" href="#"><i class="fas fa-angle-right"></i>Contact</a></li>
                     <li class=""><a class="nav-link" href="#"><i class="fas fa-angle-right"></i>Login</a></li>
                     <li class=""><a class="nav-link" href="#"><i class="fas fa-angle-right"></i>Terms & Conditions</a></li>

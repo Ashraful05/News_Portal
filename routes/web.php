@@ -51,6 +51,7 @@ Route::controller(FrontVideoController::class)->group(function(){
 });
 Route::controller(FrontPageController::class)->group(function(){
    Route::get('about','aboutPage')->name('front_about');
+   Route::get('faq','faqPage')->name('front_faq');
 });
 
 
@@ -99,5 +100,7 @@ Route::post('admin/settings/update',[AdminSettingsController::class,'adminSettin
 
 Route::controller(AdminPageController::class)->prefix('admin/page')->middleware('admin:admin')->group(function(){
    Route::get('about','editAboutPage')->name('edit_about_page');
-   Route::post('update','updateAboutPage')->name('update_about_page');
+   Route::post('about/update','updateAboutPage')->name('update_about_page');
+   Route::get('faq','editFAQPage')->name('edit_faq_page');
+   Route::post('faq/update','updateFAQPage')->name('update_faq_page');
 });
