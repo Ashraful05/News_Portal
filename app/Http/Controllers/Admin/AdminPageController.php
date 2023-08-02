@@ -62,5 +62,41 @@ class AdminPageController extends Controller
         ]);
         return redirect()->back()->with('success','Terms Data Updated');
     }
+    public function editPrivacyPage()
+    {
+        $data = Page::where('id',1)->first();
+        return view('admin.pages.privacy_page',compact('data'));
+    }
+    public function updatePrivacyPage(Request $request)
+    {
+        $request->validate([
+            'privacy_title'=>'required',
+//            'faq_detail'=>'required',
+        ]);
+        Page::where('id',1)->update([
+            'privacy_title'=>$request->privacy_title,
+            'privacy_detail'=>$request->privacy_detail,
+            'privacy_status'=>$request->privacy_status
+        ]);
+        return redirect()->back()->with('success','Privacy Data Updated');
+    }
+    public function editDisclaimerPage()
+    {
+        $data = Page::where('id',1)->first();
+        return view('admin.pages.disclaimer_page',compact('data'));
+    }
+    public function updateDisclaimerPage(Request $request)
+    {
+        $request->validate([
+            'disclaimer_title'=>'required',
+//            'faq_detail'=>'required',
+        ]);
+        Page::where('id',1)->update([
+            'disclaimer_title'=>$request->disclaimer_title,
+            'disclaimer_detail'=>$request->disclaimer_detail,
+            'disclaimer_status'=>$request->disclaimer_status
+        ]);
+        return redirect()->back()->with('success','Disclaimer Data Updated');
+    }
 
 }

@@ -53,6 +53,8 @@ Route::controller(FrontPageController::class)->group(function(){
    Route::get('about','aboutPage')->name('front_about');
    Route::get('faq','faqPage')->name('front_faq');
    Route::get('terms','termsPage')->name('front_terms');
+   Route::get('privacy','privacyPage')->name('front_privacy');
+   Route::get('disclaimer','disclaimerPage')->name('front_disclaimer');
 });
 
 
@@ -106,4 +108,8 @@ Route::controller(AdminPageController::class)->prefix('admin/page')->middleware(
    Route::post('faq/update','updateFAQPage')->name('update_faq_page');
    Route::get('terms','editTermsPage')->name('edit_terms_page');
    Route::post('terms/update','updateTermsPage')->name('update_terms_page');
+   Route::get('privacy','editPrivacyPage')->name('edit_privacy_page');
+   Route::post('privacy/update','updatePrivacyPage')->name('update_privacy_page');
+   Route::get('disclaimer','editDisclaimerPage')->name('edit_disclaimer_page');
+   Route::post('disclaimer/update','updateDisclaimerPage')->name('update_disclaimer_page');
 });

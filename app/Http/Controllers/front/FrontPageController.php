@@ -23,6 +23,17 @@ class FrontPageController extends Controller
         $pageData = Page::where('id',1)->first();
         return view('frontend.terms',compact('pageData'));
     }
+    public function privacyPage()
+    {
+        $pageData = Page::where('id',1)->first();
+        return view('frontend.privacy',compact('pageData'));
+    }
+    public function disclaimerPage()
+    {
+        $pageData = Page::where('id',1)->first();
+        return view('frontend.disclaimer',compact('pageData'));
+    }
+
 
 
 }

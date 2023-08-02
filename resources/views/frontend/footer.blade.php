@@ -17,8 +17,12 @@
                         @if($global_pages->terms_status == 'show')
                             <li><a href="{{ route('front_terms') }}">Terms and Conditions</a></li>
                         @endif
-                        <li><a href="privacy.html">Privacy Policy</a></li>
-                        <li><a href="disclaimer.html">Disclaimer</a></li>
+                        @if($global_pages->privacy_status == 'show')
+                            <li><a href="{{ route('front_privacy') }}">Privacy Policy</a></li>
+                        @endif
+                        @if($global_pages->disclaimer_status == 'show')
+                        <li><a href="{{ route('front_disclaimer') }}">Disclaimer</a></li>
+                        @endif
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
