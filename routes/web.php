@@ -55,6 +55,7 @@ Route::controller(FrontPageController::class)->group(function(){
    Route::get('terms','termsPage')->name('front_terms');
    Route::get('privacy','privacyPage')->name('front_privacy');
    Route::get('disclaimer','disclaimerPage')->name('front_disclaimer');
+   Route::get('login','loginPage')->name('front_login');
 });
 
 
@@ -112,4 +113,6 @@ Route::controller(AdminPageController::class)->prefix('admin/page')->middleware(
    Route::post('privacy/update','updatePrivacyPage')->name('update_privacy_page');
    Route::get('disclaimer','editDisclaimerPage')->name('edit_disclaimer_page');
    Route::post('disclaimer/update','updateDisclaimerPage')->name('update_disclaimer_page');
+   Route::get('login','editLoginPage')->name('edit_login_page');
+   Route::post('update/login','updateLoginPage')->name('update_login_page');
 });

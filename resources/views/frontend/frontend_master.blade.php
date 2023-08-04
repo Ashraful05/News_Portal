@@ -45,7 +45,9 @@
                         <li class="menu"><a href="{{ route('front_about') }}">About</a></li>
                     @endif
                     <li class="menu"><a href="contact.html">Contact</a></li>
-                    <li class="menu"><a href="login.html">Login</a></li>
+                    @if($global_pages->login_status == 'show')
+                        <li class="menu"><a href="{{ route('front_login') }}">Login</a></li>
+                    @endif
                     <li>
                         <div class="language-switch">
                             <select name="">

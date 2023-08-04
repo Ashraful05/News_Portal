@@ -33,6 +33,11 @@ class FrontPageController extends Controller
         $pageData = Page::where('id',1)->first();
         return view('frontend.disclaimer',compact('pageData'));
     }
+    public function loginPage()
+    {
+        $pageData = Page::where('id',1)->first();
+        return view('frontend.login',compact('pageData'));
+    }
 
 
 

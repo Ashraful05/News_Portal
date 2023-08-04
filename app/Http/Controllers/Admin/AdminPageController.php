@@ -53,7 +53,6 @@ class AdminPageController extends Controller
     {
         $request->validate([
             'terms_title'=>'required',
-//            'faq_detail'=>'required',
         ]);
         Page::where('id',1)->update([
             'terms_title'=>$request->terms_title,
@@ -71,7 +70,6 @@ class AdminPageController extends Controller
     {
         $request->validate([
             'privacy_title'=>'required',
-//            'faq_detail'=>'required',
         ]);
         Page::where('id',1)->update([
             'privacy_title'=>$request->privacy_title,
@@ -89,7 +87,6 @@ class AdminPageController extends Controller
     {
         $request->validate([
             'disclaimer_title'=>'required',
-//            'faq_detail'=>'required',
         ]);
         Page::where('id',1)->update([
             'disclaimer_title'=>$request->disclaimer_title,
@@ -97,6 +94,23 @@ class AdminPageController extends Controller
             'disclaimer_status'=>$request->disclaimer_status
         ]);
         return redirect()->back()->with('success','Disclaimer Data Updated');
+    }
+
+    public function editLoginPage()
+    {
+        $data = Page::where('id',1)->first();
+        return view('admin.pages.login_page',compact('data'));
+    }
+    public function updateLoginPage(Request $request)
+    {
+        $request->validate([
+            'login_title'=>'required',
+        ]);
+        Page::where('id',1)->update([
+            'login_title'=>$request->login_title,
+            'login_status'=>$request->login_status
+        ]);
+        return redirect()->back()->with('success','Login Data Updated');
     }
 
 }
