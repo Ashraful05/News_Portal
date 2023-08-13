@@ -44,7 +44,9 @@
                     @if($global_pages->about_status == 'show')
                         <li class="menu"><a href="{{ route('front_about') }}">About</a></li>
                     @endif
-                    <li class="menu"><a href="contact.html">Contact</a></li>
+                    @if($global_pages->contact_status == 'show')
+                        <li class="menu"><a href="{{ route('front_contact') }}">Contact</a></li>
+                    @endif
                     @if($global_pages->login_status == 'show')
                         <li class="menu"><a href="{{ route('front_login') }}">Login</a></li>
                     @endif

@@ -112,5 +112,23 @@ class AdminPageController extends Controller
         ]);
         return redirect()->back()->with('success','Login Data Updated');
     }
+    public function editContactPage()
+    {
+        $data = Page::where('id',1)->first();
+        return view('admin.pages.contact_page',compact('data'));
+    }
+    public function updateContactPage(Request $request)
+    {
+        $request->validate([
+            'contact_title'=>'required',
+        ]);
+        Page::where('id',1)->update([
+            'contact_title'=>$request->contact_title,
+            'contact_detail'=>$request->contact_detail,
+            'contact_map'=>$request->contact_map,
+            'contact_status'=>$request->contact_status
+        ]);
+        return redirect()->back()->with('success','Contact Data Updated');
+    }
 
 }

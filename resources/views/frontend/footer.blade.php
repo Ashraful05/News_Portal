@@ -21,9 +21,11 @@
                             <li><a href="{{ route('front_privacy') }}">Privacy Policy</a></li>
                         @endif
                         @if($global_pages->disclaimer_status == 'show')
-                        <li><a href="{{ route('front_disclaimer') }}">Disclaimer</a></li>
+                            <li><a href="{{ route('front_disclaimer') }}">Disclaimer</a></li>
                         @endif
-                        <li><a href="contact.html">Contact</a></li>
+                        @if($global_pages->contact_status == 'show')
+                            <li><a href="{{ route('front_contact') }}">Contact</a></li>
+                        @endif
                     </ul>
                 </div>
             </div>

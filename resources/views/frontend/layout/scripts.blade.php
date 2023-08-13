@@ -6,5 +6,6 @@
 <script src="{{ asset('/') }}frontend/assets/js/wow.min.js"></script>
 <script src="{{ asset('/') }}frontend/assets/js/select2.full.js"></script>
 <script src="{{ asset('/') }}frontend/assets/js/sweetalert2.min.js"></script>
+<script src="{{ asset('/') }}frontend/assets/js/iziToast.min.js"></script>
 <script src="{{ asset('/') }}frontend/assets/js/jquery.waypoints.min.js"></script>
 <script src="{{ asset('/') }}frontend/assets/js/acmeticker.js"></script>
