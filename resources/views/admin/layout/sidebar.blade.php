@@ -50,6 +50,9 @@
                     <li class="{{ Request::is('admin/page/disclaimer')?'active':'' }}"><a class="nav-link" href="{{ route('edit_disclaimer_page') }}"><i class="fas fa-angle-right"></i>Disclaimer</a></li>
                 </ul>
             </li>
+            <li class="{{ Request::is('admin/faq/*')?'active':'' }}">
+                <a class="nav-link" href="{{ route('faq.index') }}"><i class="fas fa-hand-point-right"></i> <span>FAQ Section</span></a>
+            </li>
 
 
 {{--            <li class="nav-item dropdown active">--}}
