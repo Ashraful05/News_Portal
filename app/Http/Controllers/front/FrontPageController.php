@@ -5,6 +5,7 @@ namespace App\Http\Controllers\front;
 use App\Http\Controllers\Controller;
 use App\Mail\Websitemail;
 use App\Models\Admin;
+use App\Models\Faq;
 use App\Models\Page;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -20,7 +21,8 @@ class FrontPageController extends Controller
     public function faqPage()
     {
         $pageData = Page::where('id',1)->first();
-        return view('frontend.faq',compact('pageData'));
+        $faqData = Faq::get();
+        return view('frontend.faq',compact('pageData','faqData'));
     }
     public function termsPage()
     {
