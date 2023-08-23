@@ -3,13 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\Websitemail;
 use App\Models\Admin;
 use App\Models\NewsPosts;
 use App\Models\SubCategory;
+use App\Models\Subscriber;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class NewsPostsController extends Controller
 {
@@ -85,6 +88,20 @@ class NewsPostsController extends Controller
                     'post_id'=>$autoIncrementId,
                     'tag_name'=>trim($tagsArrayUnique[$i])
                 ]);
+            }
+        }
+
+        if($request->subscriber_send_option == 1)
+        {
+            $subject = 'A new post is published';
+            $message = 'Hi, a new post is published into our website. Please click on the following link to see that post:<br>';
+            $message .= '<a target="_blank" href="'.route('news_details',$autoIncrementId).'">';
+            $message .= $request->post_title;
+            $message .= '</a>';
+
+            $subscribers = Subscriber::where('status','active')->get();
+            foreach ($subscribers as $row){
+                Mail::to($row->email)->send(new Websitemail($subject,$message));
             }
         }
 

@@ -59,10 +59,10 @@
 
 
     <script>
-        (function ($) {
-            $(".form_contact_ajax").on('submit',function (e) {
+        (function($){
+            $(".form_contact_ajax").on('submit', function(e){
                 e.preventDefault();
-                $("#loader").show();
+                $('#loader').show();
                 var form = this;
                 $.ajax({
                     url:$(form).attr('action'),
@@ -71,29 +71,32 @@
                     processData:false,
                     dataType:'json',
                     contentType:false,
-                    beforeSend:function () {
+                    beforeSend:function(){
                         $(form).find('span.error-text').text('');
                     },
-                    success:function (data) {
-                        $("#loader").hide();
+                    success:function(data)
+                    {
+                        $('#loader').hide();
                         if(data.code == 0)
                         {
-                            $.each(data.error_message,function(prefix,val){
+                            $.each(data.error_message, function(prefix, val) {
                                 $(form).find('span.'+prefix+'_error').text(val[0]);
                             });
                         }
-                        else if (data.code==1){
+                        else if(data.code == 1)
+                        {
                             $(form)[0].reset();
                             iziToast.success({
-                                title:'',
-                                position:'topRight',
-                                message:data.success_message
-                            })
+                                title: '',
+                                position: 'topRight',
+                                message: data.success_message,
+                            });
                         }
+
                     }
-                })
-            })
-        })(jquery)
+                });
+            });
+        })(jQuery);
     </script>
     <div id="loader"></div>
 @endsection

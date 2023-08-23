@@ -12,6 +12,9 @@ use App\Http\Controllers\front\FrontSubCategoryController;
 use App\Http\Controllers\front\FrontPhotoController;
 use App\Http\Controllers\front\FrontVideoController;
 use App\Http\Controllers\front\FrontPageController;
+use App\Http\Controllers\front\SubscriberController;
+
+
 use App\Http\Controllers\Admin\AdminSettingsController;
 use App\Http\Controllers\Admin\AdminPhotoController;
 use App\Http\Controllers\Admin\AdminVideoController;
@@ -60,6 +63,8 @@ Route::controller(FrontPageController::class)->group(function(){
    Route::get('contact','contactPage')->name('front_contact');
    Route::post('contact-email-submit','contactEmailSubmit')->name('contact_email_submit');
 });
+Route::post('subscriber',[SubscriberController::class,'index'])->name('subscribe');
+Route::get('subscriber/verify/{token}/{email}',[SubscriberController::class,'SubscriberVerification'])->name('subscriber_verification');
 
 
 //admin routes.........
