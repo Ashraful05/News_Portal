@@ -20,6 +20,7 @@ use App\Http\Controllers\Admin\AdminPhotoController;
 use App\Http\Controllers\Admin\AdminVideoController;
 use App\Http\Controllers\Admin\AdminPageController;
 use App\Http\Controllers\Admin\AdminFAQController;
+use App\Http\Controllers\Admin\AdminSubscriberController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -126,4 +127,9 @@ Route::controller(AdminPageController::class)->prefix('admin/page')->middleware(
    Route::post('update/login','updateLoginPage')->name('update_login_page');
    Route::get('contact','editContactPage')->name('edit_contact_page');
    Route::post('update/contact','updateContactPage')->name('update_contact_page');
+});
+Route::controller(AdminSubscriberController::class)->prefix('admin/subscriber')->middleware('admin:admin')->group(function (){
+    Route::get('all','allSubscriber')->name('all_subscriber');
+    Route::get('mail','mailToSubscriber')->name('mail_subscriber');
+    Route::post('mail/submit','mailSendToSubscriber')->name('mail_send_to_subscriber');
 });
