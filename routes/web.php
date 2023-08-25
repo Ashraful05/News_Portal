@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\AdminVideoController;
 use App\Http\Controllers\Admin\AdminPageController;
 use App\Http\Controllers\Admin\AdminFAQController;
 use App\Http\Controllers\Admin\AdminSubscriberController;
+use App\Http\Controllers\Admin\AdminLiveChannelController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -108,6 +109,7 @@ Route::get('admin/newspost/delete_tag/{id}/{id1}',[NewsPostsController::class,'A
 Route::resource('admin/photo',AdminPhotoController::class)->middleware('admin:admin');
 Route::resource('admin/video',AdminVideoController::class)->middleware('admin:admin');
 Route::resource('admin/faq',AdminFAQController::class)->middleware('admin:admin');
+Route::resource('admin/liveChannel',AdminLiveChannelController::class)->middleware('admin:admin');
 
 Route::get('admin/settings',[AdminSettingsController::class,'adminSettings'])->name('admin_settings')->middleware('admin:admin');
 Route::post('admin/settings/update',[AdminSettingsController::class,'adminSettingsUpdate'])->name('admin_setting_update');
@@ -133,3 +135,4 @@ Route::controller(AdminSubscriberController::class)->prefix('admin/subscriber')-
     Route::get('mail','mailToSubscriber')->name('mail_subscriber');
     Route::post('mail/submit','mailSendToSubscriber')->name('mail_send_to_subscriber');
 });
+

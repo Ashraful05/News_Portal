@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Category;
+use App\Models\LiveChannel;
 use App\Models\Page;
 use App\Models\SidebarAdvertisement;
 use App\Models\SubCategory;
@@ -36,11 +37,13 @@ class AppServiceProvider extends ServiceProvider
         $sidebarBottomAd = SidebarAdvertisement::where('sidebar_ad_location','bottom')->get();
         $globalCategories = Category::with('rSubCategory')->where('show_on_menu','show')->orderby('category_order','asc')->get();
         $globalPageData = Page::where('id',1)->first();
+        $liveChannelData = LiveChannel::get();
 
         view()->share('global_top_add_data',$topAddData);
         view()->share('global_sidebar_top_ad',$sidebarTopAd);
         view()->share('global_sidebar_bottom_ad',$sidebarBottomAd);
         view()->share('global_categories',$globalCategories);
         view()->share('global_pages',$globalPageData);
+        view()->share('global_live_channel',$liveChannelData);
     }
 }

@@ -71,14 +71,16 @@
     </div>
 
     <div class="widget">
+        @foreach($global_live_channel as $data)
         <div class="live-channel">
             <div class="live-channel-heading">
-                <h2>Live Channel - RT News</h2>
+                <h2>{{ $data->heading }}</h2>
             </div>
             <div class="live-channel-item">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/V0I5eglJMRI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ $data->video_id }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         </div>
+        @endforeach
     </div>
 
     <div class="widget">

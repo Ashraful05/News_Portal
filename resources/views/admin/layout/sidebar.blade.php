@@ -60,6 +60,9 @@
                     <li class="{{ Request::is('admin/subscriber/mail')?'active':'' }}"><a class="nav-link" href="{{ route('mail_subscriber') }}"><i class="fas fa-angle-right"></i>Send Mail to Subscriber</a></li>
                 </ul>
             </li>
+            <li class="{{ Request::is('admin/liveChannel') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('liveChannel.index') }}"><i class="fas fa-hand-point-right"></i> <span>Live Channel</span></a>
+            </li>
 
 
 {{--            <li class="nav-item dropdown active">--}}
