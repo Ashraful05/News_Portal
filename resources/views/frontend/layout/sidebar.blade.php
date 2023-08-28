@@ -72,21 +72,21 @@
 
     <div class="widget">
         @foreach($global_live_channel as $data)
-        <div class="live-channel">
-            <div class="live-channel-heading">
-                <h2>{{ $data->heading }}</h2>
+            <div class="live-channel">
+                <div class="live-channel-heading">
+                    <h2>{{ $data->heading }}</h2>
+                </div>
+                <div class="live-channel-item">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ $data->video_id }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
             </div>
-            <div class="live-channel-item">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ $data->video_id }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-        </div>
         @endforeach
     </div>
 
     <div class="widget">
         <div class="news">
             <div class="news-heading">
-                <h2>Popular News</h2>
+                <h2>Popular & Recent News</h2>
             </div>
 
             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
@@ -99,160 +99,69 @@
             </ul>
             <div class="tab-content" id="pills-tabContent">
                 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                    <div class="news-item">
-                        <div class="left">
-                            <img src="{{ asset('/') }}frontend/assets/uploads/n5.jpg" alt="">
-                        </div>
-                        <div class="right">
-                            <div class="category">
-                                <span class="badge bg-success">International</span>
+                    @foreach($global_recent_news_data as $data)
+                        <div class="news-item">
+                            <div class="left">
+                                <img src="{{ asset('uploads/'.$data->post_photo) }}" alt="">
                             </div>
-                            <h2><a href="">Remote island nation in Pacific under lockdown for first time</a></h2>
-                            <div class="date-user">
-                                <div class="user">
-                                    <a href="">Paul David</a>
+                            <div class="right">
+                                <div class="category">
+                                    <span class="badge bg-success">{{ $data->rSubCategory->sub_category_name }}</span>
                                 </div>
-                                <div class="date">
-                                    <a href="">10 Jan, 2022</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="news-item">
-                        <div class="left">
-                            <img src="{{ asset('/') }}frontend/assets/uploads/n6.jpg" alt="">
-                        </div>
-                        <div class="right">
-                            <div class="category">
-                                <span class="badge bg-success">Business</span>
-                            </div>
-                            <h2><a href="">Serbia revokes Rio Tinto lithium mine permits following protests</a></h2>
-                            <div class="date-user">
-                                <div class="user">
-                                    <a href="">Paul David</a>
-                                </div>
-                                <div class="date">
-                                    <a href="">10 Jan, 2022</a>
+                                <h2><a href="{{ route('news_details',$data->id) }}">{{ $data->post_title }}</a></h2>
+                                <div class="date-user">
+                                    <div class="user">
+                                        @if($data->author_id == 0)
+                                            @php
+                                                $userData = \App\Models\Admin::where('id',$data->admin_id)->first();
+                                            @endphp
+                                        @endif
+                                        <a href="">{{ $userData->name }}</a>
+                                    </div>
+                                    <div class="date">
+                                        @php
+                                            $ts = strtotime($data->updated_at);
+                                            $updated_at = date('d F Y',$ts);
+                                        @endphp
+                                        <a href="">{{ $updated_at }}</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="news-item">
-                        <div class="left">
-                            <img src="{{ asset('/') }}frontend/assets/uploads/n7.jpg" alt="">
-                        </div>
-                        <div class="right">
-                            <div class="category">
-                                <span class="badge bg-success">Business</span>
-                            </div>
-                            <h2><a href="">Toyota Land Cruiser customers in Japan face four-year wait</a></h2>
-                            <div class="date-user">
-                                <div class="user">
-                                    <a href="">Paul David</a>
-                                </div>
-                                <div class="date">
-                                    <a href="">10 Jan, 2022</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="news-item">
-                        <div class="left">
-                            <img src="{{ asset('/') }}frontend/assets/uploads/n8.jpg" alt="">
-                        </div>
-                        <div class="right">
-                            <div class="category">
-                                <span class="badge bg-success">Sports</span>
-                            </div>
-                            <h2><a href="">Haaland scores before going off injured in Dortmund win and it is very real</a></h2>
-                            <div class="date-user">
-                                <div class="user">
-                                    <a href="">Paul David</a>
-                                </div>
-                                <div class="date">
-                                    <a href="">10 Jan, 2022</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
+
                 </div>
                 <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                    <div class="news-item">
-                        <div class="left">
-                            <img src="{{ asset('/') }}frontend/assets/uploads/n5.jpg" alt="">
-                        </div>
-                        <div class="right">
-                            <div class="category">
-                                <span class="badge bg-success">International</span>
+                    @foreach($global_popular_news_data as $data)
+                        <div class="news-item">
+                            <div class="left">
+                                <img src="{{ asset('uploads/'.$data->post_photo) }}" alt="">
                             </div>
-                            <h2><a href="">Remote island nation in Pacific under lockdown for first time</a></h2>
-                            <div class="date-user">
-                                <div class="user">
-                                    <a href="">Paul David</a>
+                            <div class="right">
+                                <div class="category">
+                                    <span class="badge bg-success">{{ $data->rSubCategory->sub_category_name }}</span>
                                 </div>
-                                <div class="date">
-                                    <a href="">10 Jan, 2022</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="news-item">
-                        <div class="left">
-                            <img src="{{ asset('/') }}frontend/assets/uploads/n6.jpg" alt="">
-                        </div>
-                        <div class="right">
-                            <div class="category">
-                                <span class="badge bg-success">Business</span>
-                            </div>
-                            <h2><a href="">Serbia revokes Rio Tinto lithium mine permits following protests</a></h2>
-                            <div class="date-user">
-                                <div class="user">
-                                    <a href="">Paul David</a>
-                                </div>
-                                <div class="date">
-                                    <a href="">10 Jan, 2022</a>
+                                <h2><a href="{{ route('news_details',$data->id) }}">{{$data->post_title}}</a></h2>
+                                <div class="date-user">
+                                    <div class="user">
+                                        @if($data->author_id == 0 )
+                                            @php
+                                                $userData = \App\Models\Admin::where('id',$data->admin_id)->first();
+                                            @endphp
+                                            <a href="">{{ $userData->name }}</a>
+                                        @endif
+                                    </div>
+                                    <div class="date">
+                                        @php
+                                            $ts = strtotime($data->updated_at);
+                                            $updated_at = date('d F Y',$ts);
+                                        @endphp
+                                        <a href="">{{ $updated_at }}</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="news-item">
-                        <div class="left">
-                            <img src="{{ asset('/') }}frontend/assets/uploads/n7.jpg" alt="">
-                        </div>
-                        <div class="right">
-                            <div class="category">
-                                <span class="badge bg-success">Business</span>
-                            </div>
-                            <h2><a href="">Toyota Land Cruiser customers in Japan face four-year wait</a></h2>
-                            <div class="date-user">
-                                <div class="user">
-                                    <a href="">Paul David</a>
-                                </div>
-                                <div class="date">
-                                    <a href="">10 Jan, 2022</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="news-item">
-                        <div class="left">
-                            <img src="{{ asset('/') }}frontend/assets/uploads/n8.jpg" alt="">
-                        </div>
-                        <div class="right">
-                            <div class="category">
-                                <span class="badge bg-success">Sports</span>
-                            </div>
-                            <h2><a href="">Haaland scores before going off injured in Dortmund win and it is very real</a></h2>
-                            <div class="date-user">
-                                <div class="user">
-                                    <a href="">Paul David</a>
-                                </div>
-                                <div class="date">
-                                    <a href="">10 Jan, 2022</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
