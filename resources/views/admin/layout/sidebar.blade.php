@@ -63,6 +63,9 @@
             <li class="{{ Request::is('admin/liveChannel') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('liveChannel.index') }}"><i class="fas fa-hand-point-right"></i> <span>Live Channel</span></a>
             </li>
+            <li class="{{ Request::is('admin/onlinePoll/*') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('onlinePoll.index') }}"><i class="fas fa-hand-point-right"></i> <span>Online Poll</span></a>
+            </li>
 
 
 {{--            <li class="nav-item dropdown active">--}}

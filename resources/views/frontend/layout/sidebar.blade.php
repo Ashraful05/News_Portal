@@ -187,28 +187,62 @@
         </div>
         <div class="poll">
             <div class="question">
-                Do you think that Apple products will be able to survive in the next 20 years?
+                {{ $global_online_poll_data->question }}
             </div>
-            <div class="answer-option">
-                <form action="" method="post">
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="poll" id="poll_id_1">
-                        <label class="form-check-label" for="poll_id_1">Yes</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="poll" id="poll_id_2">
-                        <label class="form-check-label" for="poll_id_2">No</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="poll" id="poll_id_3">
-                        <label class="form-check-label" for="poll_id_3">No Comment</label>
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                        <a href="poll-result.html" class="btn btn-primary old">Old Result</a>
-                    </div>
-                </form>
-            </div>
+
+            @php
+                if( $global_online_poll_data->yes_vote > 0 || $global_online_poll_data->no_vote > 0)
+                {
+                    $totalVote = $global_online_poll_data->yes_vote + $global_online_poll_data->no_vote;
+                   $totalYesVotePercentage = floor(($global_online_poll_data->yes_vote * 100)/$totalVote);
+                   $totalNoVotePercentage  = floor(($global_online_poll_data->no_vote * 100)/$totalVote);
+                }
+
+            @endphp
+            @if(Session::get('current_poll_id') == $global_online_poll_data->id)
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td style="width: 100px">Yes ({{$global_online_poll_data->yes_vote}})</td>
+                            <td>
+                                <div class="progress">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: {{$totalYesVotePercentage}}%" aria-valuenow="{{$totalYesVotePercentage}}" aria-valuemin="0" aria-valuemax="100">
+                                        {{$totalYesVotePercentage}}%</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 100px">No ({{$global_online_poll_data->no_vote}})</td>
+                            <td>
+                                <div class="progress">
+                                    <div class="progress-bar bg-danger" role="progressbar" style="width: {{$totalNoVotePercentage}}%" aria-valuenow="{{$totalNoVotePercentage}}" aria-valuemin="0" aria-valuemax="100">
+                                        {{$totalNoVotePercentage}}%</div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            @endif
+
+            @if(Session::get('current_poll_id') != $global_online_poll_data->id)
+                <div class="answer-option">
+                    <form action="{{ route('poll_submit',$global_online_poll_data->id) }}" method="post">
+                        @csrf
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="vote" id="poll_id_1" value="yes">
+                            <label class="form-check-label" for="poll_id_1">Yes</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="vote" id="poll_id_2" value="no">
+                            <label class="form-check-label" for="poll_id_2">No</label>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <a href="poll-result.html" class="btn btn-primary old">Old Result</a>
+                        </div>
+                    </form>
+                </div>
+            @endif
         </div>
     </div>
 

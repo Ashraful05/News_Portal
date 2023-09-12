@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Mail\Websitemail;
 use App\Models\Admin;
 use App\Models\Faq;
+use App\Models\OnlinePoll;
 use App\Models\Page;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class FrontPageController extends Controller
@@ -69,6 +71,25 @@ class FrontPageController extends Controller
             Mail::to($adminData->email)->send(new Websitemail($subject,$message));
             return response()->json(['code'=>1,'success_message'=>'Email is Sent!!']);
         }
+    }
+    public function onlinePollSubmit(Request $request,$id)
+    {
+        $onlinePollVote = OnlinePoll::where('id',$request->id)->first();
+        if($request->vote == 'yes')
+        {
+            $onlinePollVote->yes_vote += 1;
+            $onlinePollVote->update();
+        }else if($request->vote == 'no')
+        {
+            $onlinePollVote->no_vote  += 1;
+            $onlinePollVote->update();
+        }
+        else{
+            return redirect()->back()->with('error','Plese give your vote');
+        }
+        Session::put('current_poll_id',$onlinePollVote->id);
+        return redirect()->back()->with('success','Vote is counted Successfully!');
+
     }
 
 

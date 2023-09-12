@@ -106,5 +106,25 @@
 
 @include('frontend.layout.script_footer')
 
+@if(session()->has('error'))
+    <script>
+        iziToast.error({
+            title: 'Error',
+            position:'topRight',
+            message: '{{ session()->get('error') }}',
+        });
+    </script>
+@endif
+
+@if(session()->has('success'))
+    <script>
+        iziToast.success({
+            title: '',
+            position:'topRight',
+            message:'{{ session()->get('success') }}'
+        });
+    </script>
+@endif
+
 </body>
 </html>

@@ -22,6 +22,7 @@ use App\Http\Controllers\Admin\AdminPageController;
 use App\Http\Controllers\Admin\AdminFAQController;
 use App\Http\Controllers\Admin\AdminSubscriberController;
 use App\Http\Controllers\Admin\AdminLiveChannelController;
+use App\Http\Controllers\Admin\AdminOnlinePollController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -64,6 +65,7 @@ Route::controller(FrontPageController::class)->group(function(){
    Route::get('login','loginPage')->name('front_login');
    Route::get('contact','contactPage')->name('front_contact');
    Route::post('contact-email-submit','contactEmailSubmit')->name('contact_email_submit');
+   Route::post('poll-submit/{id}','onlinePollSubmit')->name('poll_submit');
 });
 Route::post('subscriber',[SubscriberController::class,'index'])->name('subscribe');
 Route::get('subscriber/verify/{token}/{email}',[SubscriberController::class,'SubscriberVerification'])->name('subscriber_verification');
@@ -82,7 +84,9 @@ Route::controller(AdminController::class)->prefix('admin')->group(function(){
     Route::get('edit-profile','ProfileInfo')->name('admin_profile_edit')->middleware('admin:admin');
     Route::post('update-profile','ProfileInfoUpdate')->name('admin_profile_update');
 });
-Route::controller(HomeAdvertisementController::class)->prefix('admin/advertisement')->middleware('admin:admin')->group(function(){
+Route::controller(HomeAdvertisementController::class)->prefix('admin/advertisement')
+    ->middleware('admin:admin')
+    ->group(function(){
    Route::get('home','HomeAdvertisementShow')->name('home_advertisement');
    Route::post('home-update','HomeAdvertisementUpdate')->name('home_advertisement_update');
    Route::get('top','TopAdvertisementShow')->name('top_advertisement');
@@ -94,7 +98,9 @@ Route::controller(HomeAdvertisementController::class)->prefix('admin/advertiseme
    Route::post('sidebar-update/{id}','SidebarAdvertisementUpdate')->name('sidebar_advertisement_update');
    Route::get('sidebar-delete/{id}','SidebarAdvertisementDelete')->name('sidebar_advertisement_delete');
 });
-Route::controller(CategoryController::class)->prefix('admin/category')->middleware('admin:admin')->group(function(){
+Route::controller(CategoryController::class)->prefix('admin/category')
+    ->middleware('admin:admin')
+    ->group(function(){
    Route::get('show','CategoryShow')->name('admin_category_show');
    Route::get('create','CategoryCreate')->name('admin_category_create');
    Route::post('save','CategorySave')->name('admin_category_save');
@@ -110,11 +116,14 @@ Route::resource('admin/photo',AdminPhotoController::class)->middleware('admin:ad
 Route::resource('admin/video',AdminVideoController::class)->middleware('admin:admin');
 Route::resource('admin/faq',AdminFAQController::class)->middleware('admin:admin');
 Route::resource('admin/liveChannel',AdminLiveChannelController::class)->middleware('admin:admin');
+Route::resource('admin/onlinePoll',AdminOnlinePollController::class)->middleware('admin:admin');
 
 Route::get('admin/settings',[AdminSettingsController::class,'adminSettings'])->name('admin_settings')->middleware('admin:admin');
 Route::post('admin/settings/update',[AdminSettingsController::class,'adminSettingsUpdate'])->name('admin_setting_update');
 
-Route::controller(AdminPageController::class)->prefix('admin/page')->middleware('admin:admin')->group(function(){
+Route::controller(AdminPageController::class)->prefix('admin/page')
+    ->middleware('admin:admin')
+    ->group(function(){
    Route::get('about','editAboutPage')->name('edit_about_page');
    Route::post('about/update','updateAboutPage')->name('update_about_page');
    Route::get('faq','editFAQPage')->name('edit_faq_page');
@@ -130,7 +139,10 @@ Route::controller(AdminPageController::class)->prefix('admin/page')->middleware(
    Route::get('contact','editContactPage')->name('edit_contact_page');
    Route::post('update/contact','updateContactPage')->name('update_contact_page');
 });
-Route::controller(AdminSubscriberController::class)->prefix('admin/subscriber')->middleware('admin:admin')->group(function (){
+
+Route::controller(AdminSubscriberController::class)->prefix('admin/subscriber')
+    ->middleware('admin:admin')
+    ->group(function (){
     Route::get('all','allSubscriber')->name('all_subscriber');
     Route::get('mail','mailToSubscriber')->name('mail_subscriber');
     Route::post('mail/submit','mailSendToSubscriber')->name('mail_send_to_subscriber');

@@ -19,11 +19,6 @@
                                         @endif
                                         <li><a href="{{ route('news_details',$data->id) }}">{{ $data->post_title }}</a></li>
                                     @endforeach
-
-                                    {{--                                    <li><a href="">Canadian police appear to end protesters' siege of Ottawa</a></li>--}}
-                                    {{--                                    <li><a href="">Speedskating champ chooses sportsmanship over Olympic medal</a></li>--}}
-                                    {{--                                    <li><a href="">USDA head: US farmers to help if Ukraine exports threatened</a></li>--}}
-                                    {{--                                    <li><a href="">Actor Lindsey Pearlman found dead after going missing in LA</a></li>--}}
                                 </ul>
                             </div>
                         </div>
