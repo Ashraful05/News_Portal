@@ -92,6 +92,10 @@ class FrontPageController extends Controller
 
     }
 
+    public function onlinePollPreviousResult(){
+        $onlinePollData = OnlinePoll::orderby('id','desc')->get();
+        return view('frontend.previous_poll_result',compact('onlinePollData'));
+    }
 
 
 }

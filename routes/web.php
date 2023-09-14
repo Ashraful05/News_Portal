@@ -66,6 +66,7 @@ Route::controller(FrontPageController::class)->group(function(){
    Route::get('contact','contactPage')->name('front_contact');
    Route::post('contact-email-submit','contactEmailSubmit')->name('contact_email_submit');
    Route::post('poll-submit/{id}','onlinePollSubmit')->name('poll_submit');
+   Route::get('previous-poll-result','onlinePollPreviousResult')->name('previous_poll_result');
 });
 Route::post('subscriber',[SubscriberController::class,'index'])->name('subscribe');
 Route::get('subscriber/verify/{token}/{email}',[SubscriberController::class,'SubscriberVerification'])->name('subscriber_verification');

@@ -222,6 +222,7 @@
                         </tr>
                     </table>
                 </div>
+                <a href="{{ route('previous_poll_result') }}" class="btn btn-primary old" style="margin-top: 0">Old Result</a>
             @endif
 
             @if(Session::get('current_poll_id') != $global_online_poll_data->id)
@@ -238,7 +239,7 @@
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">Submit</button>
-                            <a href="poll-result.html" class="btn btn-primary old">Old Result</a>
+                            <a href="{{ route('previous_poll_result') }}" class="btn btn-primary old">Old Result</a>
                         </div>
                     </form>
                 </div>
