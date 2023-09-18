@@ -13,6 +13,7 @@ use App\Http\Controllers\front\FrontPhotoController;
 use App\Http\Controllers\front\FrontVideoController;
 use App\Http\Controllers\front\FrontPageController;
 use App\Http\Controllers\front\SubscriberController;
+use App\Http\Controllers\front\FrontArchiveController;
 
 
 use App\Http\Controllers\Admin\AdminSettingsController;
@@ -70,7 +71,8 @@ Route::controller(FrontPageController::class)->group(function(){
 });
 Route::post('subscriber',[SubscriberController::class,'index'])->name('subscribe');
 Route::get('subscriber/verify/{token}/{email}',[SubscriberController::class,'SubscriberVerification'])->name('subscriber_verification');
-
+Route::post('archive/show',[FrontArchiveController::class,'showArchive'])->name('archive_show');
+Route::get('archive/{year}/{month}',[FrontArchiveController::class,'showArchiveWithPagination'])->name('archive_with_pagination');
 
 //admin routes.........
 Route::controller(AdminController::class)->prefix('admin')->group(function(){
