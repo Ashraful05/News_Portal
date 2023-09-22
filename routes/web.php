@@ -45,6 +45,8 @@ use App\Http\Controllers\Admin\AdminOnlinePollController;
 Route::controller(HomeController::class)->group(function(){
     Route::get('/','FrontHome')->name('front_home');
     Route::get('about','FrontAbout')->name('front_about');
+    Route::get('subcategory-by-category/{id}','subCategoryByCategoryWithAjax');
+    Route::post('search-result','searchResult')->name('search_result');
 });
 Route::controller(PostController::class)->group(function(){
    Route::get('news-details/{id}','NewsDetails')->name('news_details');

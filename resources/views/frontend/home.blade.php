@@ -143,36 +143,37 @@
     <div class="search-section">
         <div class="container">
             <div class="inner">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <input type="text" name="" class="form-control" placeholder="Title or Description">
+                <form action="{{ route('search_result') }}" method="post">
+                    @csrf
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <input type="text" name="text_portion" class="form-control" placeholder="Title or Description">
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <select name="" class="form-select">
-                                <option value="">Select Category</option>
-                                <option value="">Sports</option>
-                                <option value="">National</option>
-                                <option value="">Lifestyle</option>
-                            </select>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <select name="category" id="category" class="form-select">
+                                    <option value="" selected>Select Category</option>
+                                    @foreach($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <select name="" class="form-select">
-                                <option value="">Select SubCategory</option>
-                                <option value="">Football</option>
-                                <option value="">Cricket</option>
-                                <option value="">Baseball</option>
-                            </select>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <select name="sub_category" id="sub_category" class="form-select">
+                                    <option value="" >Select SubCategory</option>
+                                </select>
+                            </div>
                         </div>
+                        <div class="col-md-3">
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </div>
+
                     </div>
-                    <div class="col-md-3">
-                        <button type="submit" class="btn btn-primary">Search</button>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
@@ -291,50 +292,50 @@
         </div>
     </div>
 
-@if($settingData->video_status == 'show')
-    <div class="video-content">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="video-heading">
-                        <h2>Videos</h2>
+    @if($settingData->video_status == 'show')
+        <div class="video-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="video-heading">
+                            <h2>Videos</h2>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="video-carousel owl-carousel">
-                        @foreach($homeVideo as $video)
-                            @if($loop->iteration > $settingData->video_total)
-                                @break
-                            @endif
-                            <div class="item">
-                                <div class="video-thumb">
-                                    <img src="http://img.youtube.com/vi/{{ $video->video_id }}/0.jpg" alt="">
-                                    <div class="bg"></div>
-                                    <div class="icon">
-                                        <a href="http://www.youtube.com/watch?v={{ $video->video_id }}" class="video-button"><i class="fas fa-play"></i></a>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="video-carousel owl-carousel">
+                            @foreach($homeVideo as $video)
+                                @if($loop->iteration > $settingData->video_total)
+                                    @break
+                                @endif
+                                <div class="item">
+                                    <div class="video-thumb">
+                                        <img src="http://img.youtube.com/vi/{{ $video->video_id }}/0.jpg" alt="">
+                                        <div class="bg"></div>
+                                        <div class="icon">
+                                            <a href="http://www.youtube.com/watch?v={{ $video->video_id }}" class="video-button"><i class="fas fa-play"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="video-caption">
+                                        <a href="">{{ $video->caption }}</a>
+                                    </div>
+                                    <div class="video-date">
+                                        @php
+                                            $ts = strtotime($video->created_at);
+                                            $created_date = date('d F, Y',$ts);
+                                        @endphp
+                                        <i class="fas fa-calendar-alt"></i> {{ $created_date }}
                                     </div>
                                 </div>
-                                <div class="video-caption">
-                                    <a href="">{{ $video->caption }}</a>
-                                </div>
-                                <div class="video-date">
-                                    @php
-                                        $ts = strtotime($video->created_at);
-                                        $created_date = date('d F, Y',$ts);
-                                    @endphp
-                                    <i class="fas fa-calendar-alt"></i> {{ $created_date }}
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
+                            @endforeach
+                        </div>
 
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-@endif
+    @endif
 
 
     @if($homeData->above_footer_ad_status == 'show')
@@ -353,4 +354,30 @@
             </div>
         </div>
     @endif
+
+
+    <script>
+        (function($){
+            $(document).ready(function(){
+                $("#category").on("change", function(){
+                    var categoryId = $("#category").val();
+                    if(categoryId) {
+                        $.ajax({
+                            type: "get",
+                            url: "{{ url('subcategory-by-category') }}" + "/" + categoryId,
+                            success: function(response) {
+                                // alert(response.sub_category_data);
+                                // console.log(response.sub_category_data);
+                                $("#sub_category").html(response.sub_category_data);
+                            },
+                            error:function(err){
+
+                            }
+                        })
+                    }
+                })
+            });
+        })(jQuery);
+    </script>
+
 @endsection
