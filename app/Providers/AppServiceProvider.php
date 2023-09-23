@@ -8,6 +8,7 @@ use App\Models\NewsPosts;
 use App\Models\OnlinePoll;
 use App\Models\Page;
 use App\Models\SidebarAdvertisement;
+use App\Models\SocialMedia;
 use App\Models\SubCategory;
 use App\Models\TopAdvertisement;
 use Illuminate\Pagination\Paginator;
@@ -43,6 +44,7 @@ class AppServiceProvider extends ServiceProvider
         $recentNewsData = NewsPosts::orderby('id','desc')->limit(4)->get();
         $popularNewsData = NewsPosts::orderby('visitors','desc')->limit(4)->get();
         $onlinePollData = OnlinePoll::orderby('id','desc')->first();
+        $socialMedia = SocialMedia::get();
 
         view()->share('global_top_add_data',$topAddData);
         view()->share('global_sidebar_top_ad',$sidebarTopAd);
@@ -53,5 +55,6 @@ class AppServiceProvider extends ServiceProvider
         view()->share('global_recent_news_data',$recentNewsData);
         view()->share('global_popular_news_data',$popularNewsData);
         view()->share('global_online_poll_data',$onlinePollData);
+        view()->share('global_social_media',$socialMedia);
     }
 }

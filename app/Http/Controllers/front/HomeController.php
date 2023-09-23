@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\HomeAdvertisement;
 use App\Models\NewsPosts;
 use App\Models\Setting;
+use App\Models\SocialMedia;
 use App\Models\SubCategory;
 use App\Models\Video;
 use Illuminate\Http\Request;
@@ -21,6 +22,7 @@ class HomeController extends Controller
         $subCategoryData = SubCategory::with('rPost')->orderBy('sub_category_order','asc')->where('show_on_home_page','show')->get();
         $homeVideo = Video::get();
         $categories = Category::orderby('category_order','asc')->get();
+
         return view('frontend.home',compact('homeData','settingData','postData','subCategoryData','homeVideo','categories'));
     }
     public function FrontAbout()
