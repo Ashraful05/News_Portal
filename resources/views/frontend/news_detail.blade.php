@@ -1,6 +1,6 @@
 @extends('frontend.frontend_master')
 @section('title')
-{{$newsDetail->post_title}}
+    {{$newsDetail->post_title}}
 @endsection
 @section('main_content')
     <div class="page-top">
@@ -78,68 +78,45 @@
                             })();
                         </script>
                     </div>
+
                     <div class="related-news">
                         <div class="related-news-heading">
                             <h2>Related News</h2>
                         </div>
                         <div class="related-post-carousel owl-carousel owl-theme">
-                            <div class="item">
-                                <div class="photo">
-                                    <img src="uploads/n6.jpg" alt="">
-                                </div>
-                                <div class="category">
-                                    <span class="badge bg-success">International</span>
-                                </div>
-                                <h3><a href="">Haaland scores before going off injured in Dortmund win and it is very real</a></h3>
-                                <div class="date-user">
-                                    <div class="user">
-                                        <a href="">Paul David</a>
+                            @foreach($relatedPostArray as $data)
+                                @if($data->id == $newsDetail->id)
+                                    @continue
+                                @endif
+                                <div class="item">
+                                    <div class="photo">
+                                        <img src="{{ asset('uploads/'.$data->post_photo) }}" alt="">
                                     </div>
-                                    <div class="date">
-                                        <a href="">10 Jan, 2022</a>
+                                    <div class="category">
+                                        <span class="badge bg-success">{{ $data->rSubCategory->sub_category_name }}</span>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="photo">
-                                    <img src="uploads/n6.jpg" alt="">
-                                </div>
-                                <div class="category">
-                                    <span class="badge bg-success">International</span>
-                                </div>
-                                <h3><a href="">Haaland scores before going off injured in Dortmund win and it is very real</a></h3>
-                                <div class="date-user">
-                                    <div class="user">
-                                        <a href="">Paul David</a>
-                                    </div>
-                                    <div class="date">
-                                        <a href="">10 Jan, 2022</a>
+                                    <h3><a href="{{ route('news_details',$data->id) }}">{{ $data->post_title }}</a></h3>
+                                    <div class="date-user">
+                                        <div class="user">
+                                            <a href="">{{$userData->name}}</a>
+                                        </div>
+                                        <div class="date">
+                                            @php
+                                                $ts = strtotime($data->updated_at);
+                                                $updatedDate =  date('d F Y',$ts);
+                                            @endphp
+                                            {{ $updatedDate }}
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="item">
-                                <div class="photo">
-                                    <img src="uploads/n6.jpg" alt="">
-                                </div>
-                                <div class="category">
-                                    <span class="badge bg-success">International</span>
-                                </div>
-                                <h3><a href="">Haaland scores before going off injured in Dortmund win and it is very real</a></h3>
-                                <div class="date-user">
-                                    <div class="user">
-                                        <a href="">Paul David</a>
-                                    </div>
-                                    <div class="date">
-                                        <a href="">10 Jan, 2022</a>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
+
                 </div>
                 <div class="col-lg-4 col-md-6 sidebar-col">
 
-                       @include('frontend.layout.sidebar')
+                    @include('frontend.layout.sidebar')
 
                 </div>
             </div>

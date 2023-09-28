@@ -25,6 +25,12 @@ class PostController extends Controller
         $newVisitor = $newsDetail->visitors+1;
         $newsDetail->visitors = $newVisitor;
         $newsDetail->update();
-        return view('frontend.news_detail',compact('newsDetail','userData','tags'));
+
+        $relatedPostArray = NewsPosts::orderby('id','desc')->where('sub_category_id',$newsDetail->sub_category_id)->get();
+//        foreach ($relatedPostArray as $data){
+//            echo $data->post_title.'<br>';
+//        }
+
+        return view('frontend.news_detail',compact('newsDetail','userData','tags','relatedPostArray'));
     }
 }
