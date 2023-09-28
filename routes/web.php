@@ -26,6 +26,7 @@ use App\Http\Controllers\Admin\AdminSubscriberController;
 use App\Http\Controllers\Admin\AdminLiveChannelController;
 use App\Http\Controllers\Admin\AdminOnlinePollController;
 use App\Http\Controllers\Admin\AdminSocialMediaController;
+use App\Http\Controllers\Admin\AdminAuthorController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -126,6 +127,7 @@ Route::resource('admin/faq',AdminFAQController::class)->middleware('admin:admin'
 Route::resource('admin/liveChannel',AdminLiveChannelController::class)->middleware('admin:admin');
 Route::resource('admin/onlinePoll',AdminOnlinePollController::class)->middleware('admin:admin');
 Route::resource('admin/socialMedia',AdminSocialMediaController::class)->middleware('admin:admin');
+Route::resource('admin/author',AdminAuthorController::class)->middleware('admin:admin');
 
 Route::get('admin/settings',[AdminSettingsController::class,'adminSettings'])->name('admin_settings')->middleware('admin:admin');
 Route::post('admin/settings/update',[AdminSettingsController::class,'adminSettingsUpdate'])->name('admin_setting_update');
