@@ -58,7 +58,7 @@
                                         <div class="form-group mb-1">
                                             <div>
                                                 <img id="showImage" class="rounded avatar-lg" style="height: 100px;width: 100px;"
-                                                     src="{{ (!empty($author->photo))?asset('uploads/'.$author->photo):url('uploads/no_image.jpg') }}"
+                                                     src="{{ (!empty($author->photo))?asset('author/assets/uploads/'.$author->photo):url('uploads/no_image.jpg') }}"
                                                      alt="Card image cap">
                                             </div>
                                         </div>

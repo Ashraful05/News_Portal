@@ -97,7 +97,7 @@ class AdminController extends Controller
 
         $request->validate([
            'name'=>'required',
-            'email'=>'required|email'
+            'email'=>'required|email|unique:admins'
         ]);
         if($request->password || $request->retype_password != ''){
             $request->validate([
@@ -110,14 +110,14 @@ class AdminController extends Controller
             $request->validate([
                'photo'=>'image|mimes:jpg,jpeg,png,gif'
             ]);
-
-            unlink(public_path('admin/assets/uploads/'.$adminData->photo));
-
+            if($adminData->photo != ''){
+                unlink(public_path('admin/assets/uploads/'.$adminData->photo));
+            }
+            $now = time();
             $ext = $request->file('photo')->extension();
-            $finalName = 'admin'.'.'.$ext;
+            $finalName = 'admin_'.$now.'.'.$ext;
             $request->file('photo')->move(public_path('admin/assets/uploads/'),$finalName);
             $adminData->photo = $finalName;
-
         }
 
         $adminData->name = $request->name;

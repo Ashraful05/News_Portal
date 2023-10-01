@@ -16,10 +16,12 @@
                 <a class="nav-link" href="{{ route('admin_settings') }}"><i class="fas fa-hand-point-right"></i> <span>Settings</span></a>
             </li>
 
-            <li class="nav-item dropdown {{ Request::is('admin/author/*')?'active':'' }}">
+            <li class="nav-item dropdown {{ Request::is('admin/author')||Request::is('admin/author/*')?'active':'' }}">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-hand-point-right"></i><span>Author</span></a>
                 <ul class="dropdown-menu">
-                    <li class="{{ Request::is('admin/author')?'active':'' }}"><a class="nav-link" href="{{ route('author.index') }}"><i class="fas fa-angle-right"></i>Author List</a></li>
+                    <li class="{{ Request::is('admin/author')?'active':'' }}">
+                        <a class="nav-link" href="{{ route('author.index') }}">
+                            <i class="fas fa-angle-right"></i>Author List</a></li>
                     <li class=""><a class="nav-link"><i class="fas fa-angle-right"></i>Author Posts</a></li>
                 </ul>
             </li>

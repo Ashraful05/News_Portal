@@ -57,7 +57,7 @@
     <script>
         iziToast.error({
             title: 'Error',
-            position:'center',
+            position:'topRight',
             message: '{{ session()->get('error') }}',
         });
     </script>

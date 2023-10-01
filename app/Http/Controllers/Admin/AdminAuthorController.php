@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Mail\Websitemail;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Validation\Rule;
 
 class AdminAuthorController extends Controller
 {
@@ -43,8 +44,8 @@ class AdminAuthorController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-           'name'=>'required',
-           'email'=>'required|email|unique:authors',
+            'name'=>'required',
+            'email'=>'required|email|unique:authors',
             'password'=>'required',
             'retype_password'=>'required|same:password'
         ]);
@@ -56,14 +57,23 @@ class AdminAuthorController extends Controller
             $ext = $request->file('photo')->extension();
             $finalName = 'author_'.$now.'.'.$ext;
             $request->file('photo')->move(public_path('author/assets/uploads/'),$finalName);
+
+            Author::create([
+                'name'=>$request->name,
+                'email'=>$request->email,
+                'password'=>Hash::make($request->password),
+                'photo'=>$finalName,
+                'token'=>'',
+            ]);
+        }else{
+            Author::create([
+                'name'=>$request->name,
+                'email'=>$request->email,
+                'password'=>Hash::make($request->password),
+                'token'=>'',
+            ]);
         }
-        Author::create([
-           'name'=>$request->name,
-           'email'=>$request->email,
-           'password'=>Hash::make($request->password),
-           'photo'=>$finalName,
-            'token'=>'',
-        ]);
+
 
         $subject = 'Your author account is created!';
         $message = 'Hi,your account is created successfully and now you can login to our system from login page:
@@ -71,9 +81,10 @@ class AdminAuthorController extends Controller
         $message .= '<a href="'.route('front_login').'">';
         $message .= 'Click on this link';
         $message .= '</a>';
+        $message .= '<br><br>Please see your password here and after login please change your password<br>';
+        $message .= $request->password;
 
         Mail::to($request->email)->send(new Websitemail($subject,$message));
-
 
         return redirect()->route('author.index')->with('success','Author Account is Created Successfully!');
     }
@@ -97,7 +108,7 @@ class AdminAuthorController extends Controller
      */
     public function edit(Author $author)
     {
-        //
+        return view('admin.author.form',compact('author'));
     }
 
     /**
@@ -109,7 +120,41 @@ class AdminAuthorController extends Controller
      */
     public function update(Request $request, Author $author)
     {
-        //
+        $request->validate([
+            'name'=>'required',
+            'email'=>[
+                'required',
+                'email',
+                Rule::unique('authors')->ignore($author->id)
+            ]
+        ]);
+        if($request->password || $request->retype_password != ''){
+            $request->validate([
+                'password'=>'required',
+                'retype_password'=>'required|same:password'
+            ]);
+            $author->password = Hash::make($request->password);
+        }
+        if($request->hasFile('photo')){
+            $request->validate([
+                'photo'=>'image|mimes:jpg,jpeg,png,gif'
+            ]);
+            if($author->photo != ''){
+                unlink(public_path('author/assets/uploads/'.$author->photo));
+            }
+            $now = time();
+            $ext = $request->file('photo')->extension();
+            $finalName = 'author_'.$now.'.'.$ext;
+            $request->file('photo')->move(public_path('author/assets/uploads/'),$finalName);
+            $author->photo = $finalName;
+        }
+
+        $author->update([
+            'name'=>$request->name,
+            'email'=>$request->email,
+        ]);
+
+        return redirect()->route('author.index')->with('success','Author Info Updated!!');
     }
 
     /**
@@ -120,6 +165,10 @@ class AdminAuthorController extends Controller
      */
     public function destroy(Author $author)
     {
-        //
+        if($author->photo != ''){
+            unlink(public_path('author/assets/uploads/'.$author->photo));
+        }
+        $author->delete();
+        return redirect()->back()->with('error','Author Info Deleted!!!');
     }
 }
