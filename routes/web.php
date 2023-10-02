@@ -69,6 +69,11 @@ Route::controller(FrontPageController::class)->group(function(){
    Route::get('privacy','privacyPage')->name('front_privacy');
    Route::get('disclaimer','disclaimerPage')->name('front_disclaimer');
    Route::get('login','loginPage')->name('front_login');
+   Route::post('login-submit','loginSubmit')->name('author_login');
+   Route::get('author/home','authorHome')->name('author_home')->middleware('author:author');
+   Route::get('author/profile/edit','authorProfileEdit')->name('author_profile_edit')->middleware('author:author');
+   Route::post('author/profile/update','authorProfileUpdate')->name('author_profile_update');
+   Route::get('logout','authorLogout')->name('author_logout');
    Route::get('contact','contactPage')->name('front_contact');
    Route::post('contact-email-submit','contactEmailSubmit')->name('contact_email_submit');
    Route::post('poll-submit/{id}','onlinePollSubmit')->name('poll_submit');

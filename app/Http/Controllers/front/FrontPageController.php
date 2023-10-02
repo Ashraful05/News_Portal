@@ -5,13 +5,17 @@ namespace App\Http\Controllers\front;
 use App\Http\Controllers\Controller;
 use App\Mail\Websitemail;
 use App\Models\Admin;
+use App\Models\Author;
 use App\Models\Faq;
 use App\Models\OnlinePoll;
 use App\Models\Page;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class FrontPageController extends Controller
 {
@@ -45,6 +49,74 @@ class FrontPageController extends Controller
     {
         $pageData = Page::where('id',1)->first();
         return view('frontend.login',compact('pageData'));
+    }
+    public function loginSubmit(Request $request)
+    {
+        $request->validate([
+            'email'=>'required|email',
+            'password'=>'required'
+        ]);
+        $credentials = [
+            'email'=>$request->email,
+            'password'=>$request->password
+        ];
+        if(Auth::guard('author')->attempt($credentials)){
+            return redirect()->route('author_home');
+        }else{
+            return redirect()->route('front_login')->with('error','Invalid Credentials');
+        }
+    }
+    public function authorHome()
+    {
+        return view('author.home');
+    }
+    public function authorProfileEdit()
+    {
+        return view('author.author_profile_edit');
+    }
+    public function authorProfileUpdate(Request $request)
+    {
+        $authorData = Author::where('email',Auth::guard('author')->user()->email)->first();
+
+        $request->validate([
+            'name'=>'required',
+            'email'=>[
+                'required',
+                'email',
+                Rule::unique('authors')->ignore($authorData->id)
+            ]
+        ]);
+        if($request->password || $request->retype_password != ''){
+            $request->validate([
+                'password'=>'required',
+                'retype_password'=>'required|same:password'
+            ]);
+            $authorData->password = Hash::make($request->password);
+        }
+        if($request->hasFile('photo')){
+            $request->validate([
+                'photo'=>'image|mimes:jpg,jpeg,png,gif'
+            ]);
+            if($authorData->photo != ''){
+                unlink(public_path('author/assets/uploads/'.$authorData->photo));
+            }
+            $now = time();
+            $ext = $request->file('photo')->extension();
+            $finalName = 'author_'.$now.'.'.$ext;
+            $request->file('photo')->move(public_path('author/assets/uploads/'),$finalName);
+            $authorData->photo = $finalName;
+        }
+
+        $authorData->name = $request->name;
+        $authorData->email = $request->email;
+        $authorData->update();
+
+        return redirect()->back()->with('success','Profile Info Updated!!');
+    }
+    public function AuthorLogout()
+    {
+        Auth::guard('author')->logout();
+        return redirect()->route('front_login');
     }
     public function contactPage()
     {
