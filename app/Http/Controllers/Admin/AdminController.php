@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Testing\Fluent\Concerns\Has;
+use Illuminate\Validation\Rule;
 
 class AdminController extends Controller
 {
@@ -97,7 +98,12 @@ class AdminController extends Controller
 
         $request->validate([
            'name'=>'required',
-            'email'=>'required|email|unique:admins'
+//            'email'=>'required|email|unique:admins',
+            'email'=>[
+                'required',
+                'email',
+                Rule::unique('admins')->ignore($adminData->id)
+            ]
         ]);
         if($request->password || $request->retype_password != ''){
             $request->validate([

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Mail\Websitemail;
 use App\Models\Admin;
+use App\Models\Author;
 use App\Models\NewsPosts;
 use App\Models\SubCategory;
 use App\Models\Subscriber;
@@ -121,10 +122,10 @@ class NewsPostsController extends Controller
         if($postDetail->author_id == 0){
            $userData = Admin::where('id',$postDetail->admin_id)->first();
         }else{
-
+            $userData = Author::where('id',$postDetail->author_id)->first();
         }
 //        return view('frontend.news_post_details');
-        return view('frontend.news_detail');
+        return view('frontend.news_detail',compact('userData'));
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\front;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
+use App\Models\Author;
 use App\Models\NewsPosts;
 use App\Models\Tag;
 use Illuminate\Http\Request;
@@ -19,7 +20,7 @@ class PostController extends Controller
             $userData = Admin::where('id',$newsDetail->admin_id)->first();
 //            $userData->name;
         }else{
-
+            $userData = Author::where('id',$newsDetail->author_id)->first();
         }
         // update page view count...
         $newVisitor = $newsDetail->visitors+1;

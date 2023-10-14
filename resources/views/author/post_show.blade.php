@@ -1,8 +1,8 @@
-@extends('admin.admin_master')
-@section('title','NewsPost View')
-@section('heading','NewsPost Show')
+@extends('author.author_master')
+@section('title','Author Post View')
+@section('heading','Author Post Show')
 @section('button')
-    <a href="{{ route('newspost.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Add</a>
+    <a href="{{ route('post.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Add</a>
 @endsection
 @section('main_content')
     <div class="section-body">
@@ -20,7 +20,6 @@
                                     <th>Post Category</th>
                                     <th>Post SubCategory</th>
                                     <th>Author Name</th>
-                                    <th>Admin Name</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -29,9 +28,9 @@
                                     <tr>
                                         <td>{{ ++$row }}</td>
                                         @if($data->post_photo)
-                                        <td>
-                                            <img src="{{ asset('uploads/'.$data->post_photo) }}" style="height: 100px;width: 100px;" alt="">
-                                        </td>
+                                            <td>
+                                                <img src="{{ asset('uploads/'.$data->post_photo) }}" style="height: 100px;width: 100px;" alt="">
+                                            </td>
                                         @else
                                             <td>
                                                 <img src="{{ asset('uploads/no_image.jpg') }}" style="height: 100px;width: 100px;" alt="">
@@ -47,14 +46,9 @@
                                                 <p class="text-danger">No Author Found!</p>
                                             @endif
                                         </td>
-                                        <td>
-                                            @if($data->admin_id != 0)
-                                                {{ Auth::guard('admin')->user()->name }}
-                                            @endif
-                                        </td>
                                         <td class="pt_10 pb_10">
-                                            <a href="{{ route('newspost.edit',$data->id) }}" class="btn btn-primary" title="Edit Data"><i class="fas fa-edit"></i></a>
-                                            <form action="{{ route('newspost.destroy',$data->id) }}" method="post">
+                                            <a href="{{ route('post.edit',$data->id) }}" class="btn btn-primary" title="Edit Data"><i class="fas fa-edit"></i></a>
+                                            <form action="{{ route('post.destroy',$data->id) }}" method="post">
                                                 @csrf
                                                 @method('delete')
                                                 <button type="submit" onclick="return confirm('Are you sure to delete?')" class="btn btn-danger" title="Delete Data"> <i class="fas fa-trash-alt"></i> </button>

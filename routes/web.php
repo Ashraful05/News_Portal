@@ -27,6 +27,7 @@ use App\Http\Controllers\Admin\AdminLiveChannelController;
 use App\Http\Controllers\Admin\AdminOnlinePollController;
 use App\Http\Controllers\Admin\AdminSocialMediaController;
 use App\Http\Controllers\Admin\AdminAuthorController;
+use App\Http\Controllers\author\AuthorPostController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -98,6 +99,10 @@ Route::controller(AdminController::class)->prefix('admin')->group(function(){
     Route::get('edit-profile','ProfileInfo')->name('admin_profile_edit')->middleware('admin:admin');
     Route::post('update-profile','ProfileInfoUpdate')->name('admin_profile_update');
 });
+//author routes.....
+Route::resource('author/post',AuthorPostController::class)->middleware('author:author');
+
+
 Route::controller(HomeAdvertisementController::class)->prefix('admin/advertisement')
     ->middleware('admin:admin')
     ->group(function(){
