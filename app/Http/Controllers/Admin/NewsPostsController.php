@@ -137,6 +137,10 @@ class NewsPostsController extends Controller
     public function edit(NewsPosts $newspost)
     {
 //        return $newspost;
+        $permission = NewsPosts::where(['id'=>$newspost->id,'admin_id'=>Auth::guard('admin')->user()->id])->count();
+        if(!$permission){
+            return redirect()->route('admin_home')->with('error','You can not edit auhtor post');
+        }
         $subCategories = SubCategory::with('rCategory')->get();
         $tags = Tag::where('post_id',$newspost->id)->get();
 //        return $tags;
@@ -216,6 +220,10 @@ class NewsPostsController extends Controller
     public function destroy(NewsPosts $newspost)
     {
 //        return $newspost;
+        $permission = NewsPosts::where(['id'=>$newspost->id,'admin_id'=>Auth::guard('admin')->user()->id])->count();
+        if(!$permission){
+            return redirect()->route('admin_home')->with('error','You can not delete auhtor post');
+        }
         if(empty($newspost->post_photo)){
             $newspost->delete();
             Tag::where('post_id',$newspost->id)->delete();

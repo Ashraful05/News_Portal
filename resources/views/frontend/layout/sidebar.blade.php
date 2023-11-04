@@ -107,8 +107,12 @@
                                             @php
                                                 $userData = \App\Models\Admin::where('id',$data->admin_id)->first();
                                             @endphp
+                                        @else
+                                            @php
+                                                $userData = \App\Models\Author::where('id',$data->author_id)->first();
+                                            @endphp
                                         @endif
-                                        <a href="">{{ $userData->name }}</a>
+                                        <a href="javascript:void;">{{ $userData->name }}</a>
                                     </div>
                                     <div class="date">
                                         @php
@@ -140,8 +144,12 @@
                                             @php
                                                 $userData = \App\Models\Admin::where('id',$data->admin_id)->first();
                                             @endphp
-                                            <a href="">{{ $userData->name }}</a>
+                                        @else
+                                            @php
+                                                $userData = \App\Models\Author::where('id',$data->author_id)->first();
+                                            @endphp
                                         @endif
+                                        <a href="javascript:void;">{{ $userData->name }}</a>
                                     </div>
                                     <div class="date">
                                         @php

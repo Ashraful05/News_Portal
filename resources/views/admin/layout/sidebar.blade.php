@@ -22,7 +22,7 @@
                     <li class="{{ Request::is('admin/author')?'active':'' }}">
                         <a class="nav-link" href="{{ route('author.index') }}">
                             <i class="fas fa-angle-right"></i>Author List</a></li>
-                    <li class=""><a class="nav-link"><i class="fas fa-angle-right"></i>Author Posts</a></li>
+                    <li class=""><a class="nav-link" href="{{ route('author_post_view') }}"><i class="fas fa-angle-right"></i>Author Posts</a></li>
                 </ul>
             </li>
 

@@ -2,7 +2,7 @@
 @section('title','Author Post View')
 @section('heading','Author Post Show')
 @section('button')
-    <a href="{{ route('post.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Add</a>
+    <a href="{{ route('post_create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Add</a>
 @endsection
 @section('main_content')
     <div class="section-body">
@@ -47,11 +47,9 @@
                                             @endif
                                         </td>
                                         <td class="pt_10 pb_10">
-                                            <a href="{{ route('post.edit',$data->id) }}" class="btn btn-primary" title="Edit Data"><i class="fas fa-edit"></i></a>
-                                            <form action="{{ route('post.destroy',$data->id) }}" method="post">
-                                                @csrf
-                                                @method('delete')
-                                                <button type="submit" onclick="return confirm('Are you sure to delete?')" class="btn btn-danger" title="Delete Data"> <i class="fas fa-trash-alt"></i> </button>
+                                            <a href="{{ route('author_post_edit',$data->id) }}" class="btn btn-primary" title="Edit Data"><i class="fas fa-edit"></i></a>
+                                            <a href="{{ route('author_post_delete',$data->id) }}" class="btn btn-danger" title="Delete Data" onclick="return confirm('Are you sure to delete?')"><i class="fas fa-trash-alt"></i></a>
+
                                             </form>
 
                                         </td>

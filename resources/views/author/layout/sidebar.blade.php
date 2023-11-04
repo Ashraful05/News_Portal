@@ -15,7 +15,7 @@
             <li class="nav-item dropdown {{ Request::is('author/post/*')?'active':'' }}">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-hand-point-right"></i><span>Author Post</span></a>
                 <ul class="dropdown-menu">
-                    <li class="{{ Request::is('author/post')?'active':'' }}"><a class="nav-link" href="{{ route('post.index') }}"><i class="fas fa-angle-right"></i>Index</a></li>
+                    <li class="{{ Request::is('author/post/home')?'active':'' }}"><a class="nav-link" href="{{ route('author_post_view') }}"><i class="fas fa-angle-right"></i>View</a></li>
                 </ul>
             </li>
 

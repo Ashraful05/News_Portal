@@ -53,13 +53,14 @@
                                             @endif
                                         </td>
                                         <td class="pt_10 pb_10">
+                                            @if($data->admin_id != 0)
                                             <a href="{{ route('newspost.edit',$data->id) }}" class="btn btn-primary" title="Edit Data"><i class="fas fa-edit"></i></a>
                                             <form action="{{ route('newspost.destroy',$data->id) }}" method="post">
                                                 @csrf
                                                 @method('delete')
                                                 <button type="submit" onclick="return confirm('Are you sure to delete?')" class="btn btn-danger" title="Delete Data"> <i class="fas fa-trash-alt"></i> </button>
                                             </form>
-
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

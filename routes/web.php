@@ -99,8 +99,7 @@ Route::controller(AdminController::class)->prefix('admin')->group(function(){
     Route::get('edit-profile','ProfileInfo')->name('admin_profile_edit')->middleware('admin:admin');
     Route::post('update-profile','ProfileInfoUpdate')->name('admin_profile_update');
 });
-//author routes.....
-Route::resource('author/post',AuthorPostController::class)->middleware('author:author');
+
 
 
 Route::controller(HomeAdvertisementController::class)->prefix('admin/advertisement')
@@ -139,6 +138,9 @@ Route::resource('admin/onlinePoll',AdminOnlinePollController::class)->middleware
 Route::resource('admin/socialMedia',AdminSocialMediaController::class)->middleware('admin:admin');
 Route::resource('admin/author',AdminAuthorController::class)->middleware('admin:admin');
 
+//Route::resource('author/newspost',AuthorPostController::class)->middleware('author:author');
+
+
 Route::get('admin/settings',[AdminSettingsController::class,'adminSettings'])->name('admin_settings')->middleware('admin:admin');
 Route::post('admin/settings/update',[AdminSettingsController::class,'adminSettingsUpdate'])->name('admin_setting_update');
 
@@ -167,5 +169,19 @@ Route::controller(AdminSubscriberController::class)->prefix('admin/subscriber')
     Route::get('all','allSubscriber')->name('all_subscriber');
     Route::get('mail','mailToSubscriber')->name('mail_subscriber');
     Route::post('mail/submit','mailSendToSubscriber')->name('mail_send_to_subscriber');
+});
+
+
+//author routes.....
+Route::controller(AuthorPostController::class)->middleware('author:author')
+    ->prefix('author/post')
+    ->group(function (){
+    Route::get('home','postView')->name('author_post_view');
+    Route::get('create','postCreate')->name('post_create');
+    Route::post('store','savePost')->name('author_post_save');
+    Route::get('edit/{id}','editPost')->name('author_post_edit');
+    Route::post('update/{id}','updatePost')->name('author_post_update');
+    Route::get('delete/{id}','deletePost')->name('author_post_delete');
+    Route::get('tag/delete/{id}/{id1}','AuthorNewsPostTagDelete')->name('author_post_delete_tag');
 });
 
