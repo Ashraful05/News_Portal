@@ -79,6 +79,10 @@ Route::controller(FrontPageController::class)->group(function(){
    Route::post('contact-email-submit','contactEmailSubmit')->name('contact_email_submit');
    Route::post('poll-submit/{id}','onlinePollSubmit')->name('poll_submit');
    Route::get('previous-poll-result','onlinePollPreviousResult')->name('previous_poll_result');
+    Route::get('forget-password','ForgetPassword')->name('forget_password');
+    Route::post('forget-password-submit','ForgetPasswordSubmit')->name('forget_password_submit');
+    Route::get('reset-password/{token}/{email}','ResetPassword')->name('reset_password');
+    Route::post('reset-password-submit','ResetPasswordSubmit')->name('reset_password_submit');
 });
 Route::post('subscriber',[SubscriberController::class,'index'])->name('subscribe');
 Route::get('subscriber/verify/{token}/{email}',[SubscriberController::class,'SubscriberVerification'])->name('subscriber_verification');

@@ -168,6 +168,51 @@ class FrontPageController extends Controller
         $onlinePollData = OnlinePoll::orderby('id','desc')->get();
         return view('frontend.previous_poll_result',compact('onlinePollData'));
     }
+    public function ForgetPassword()
+    {
+        return view('frontend.forget_password');
+    }
+    public function ForgetPasswordSubmit(Request $request)
+    {
+        $request->validate([
+            'email'=>'required|email'
+        ]);
+        $data = Author::where('email',$request->email)->first();
+        if(!$data){
+            return redirect()->route('forget_password')->with('error','Email not found!');
+        }
+        $token = hash('sha256',time());
+        $data->token = $token;
+        $data->update();
+        $reset_password_link = url('reset-password/'.$token.'/'.$request->email);
+        $subject = 'Reset Password';
+        $message = 'Please click on the following link: <br>';
+        $message .= '<a href="'.$reset_password_link.'">Click Here</a>';
+
+        Mail::to($request->email)->send(new Websitemail($subject,$message));
+
+        return redirect()->route('front_login')->with('success','Please check your email and follow the steps there');
+    }
+    public function ResetPassword($token,$email)
+    {
+        $data = Author::where(['token'=>$token,'email'=>$email])->first();
+        if(!$data){
+            return redirect()->route('front_login');
+        }
+        return view('frontend.reset_password',compact('token','email'));
+    }
+    public function ResetPasswordSubmit(Request $request)
+    {
+        $request->validate([
+            'password'=>'required',
+            'retype_password' =>'required|same:password'
+        ]);
+        $data = Author::where(['token'=>$request->token,'email'=>$request->email])->first();
+        $data->password = Hash::make($request->password);
+        $data->token = '';
+        $data->update();
+        return redirect()->route('front_login')->with('success','Password is successfully reset');
+    }
 
 
 }
