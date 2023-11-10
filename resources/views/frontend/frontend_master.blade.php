@@ -71,7 +71,7 @@
             <div class="col-md-4 d-flex align-items-center">
                 <div class="logo">
                     <a href="{{ route('front_home') }}">
-                        <img src="{{ asset('/') }}frontend/assets/uploads/logo.png" alt="">
+                        <img src="{{ asset('uploads/'.$global_setting_data->logo) }}" alt="">
                     </a>
                 </div>
             </div>

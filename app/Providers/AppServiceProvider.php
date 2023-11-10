@@ -7,6 +7,7 @@ use App\Models\LiveChannel;
 use App\Models\NewsPosts;
 use App\Models\OnlinePoll;
 use App\Models\Page;
+use App\Models\Setting;
 use App\Models\SidebarAdvertisement;
 use App\Models\SocialMedia;
 use App\Models\SubCategory;
@@ -45,6 +46,7 @@ class AppServiceProvider extends ServiceProvider
         $popularNewsData = NewsPosts::orderby('visitors','desc')->limit(4)->get();
         $onlinePollData = OnlinePoll::orderby('id','desc')->first();
         $socialMedia = SocialMedia::get();
+        $settingsData = Setting::where('id',1)->first();
 
         view()->share('global_top_add_data',$topAddData);
         view()->share('global_sidebar_top_ad',$sidebarTopAd);
@@ -56,5 +58,6 @@ class AppServiceProvider extends ServiceProvider
         view()->share('global_popular_news_data',$popularNewsData);
         view()->share('global_online_poll_data',$onlinePollData);
         view()->share('global_social_media',$socialMedia);
+        view()->share('global_setting_data',$settingsData);
     }
 }

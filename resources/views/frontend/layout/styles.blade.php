@@ -1,4 +1,4 @@
-<link rel="icon" type="image/png" href="{{ asset('/') }}frontend/assets/uploads/favicon.png">
+<link rel="icon" type="image/png" href="{{ asset('uploads/'.$global_setting_data->favicon) }}">
 
 <!-- All CSS -->
 <link rel="stylesheet" href="{{ asset('/') }}frontend/assets/css/bootstrap.min.css">
