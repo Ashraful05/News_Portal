@@ -21,6 +21,9 @@ return new class extends Migration
             $table->text('video_status');
             $table->text('logo');
             $table->text('favicon');
+            $table->text('top_bar_date_status');
+            $table->text('top_bar_email');
+            $table->text('top_bar_email_status');
             $table->timestamps();
         });
     }

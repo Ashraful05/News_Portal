@@ -12,10 +12,12 @@ class AdminSettingsController extends Controller
     {
         $setting = Setting::where("id",1)->first();
 //        return $setting;
+
         return view('admin.settings.settings',compact('setting'));
     }
     public function adminSettingsUpdate(Request $request)
     {
+//        return $request->all();
         $request->validate([
            'news_ticker_total'=>'required'
         ]);
@@ -25,6 +27,10 @@ class AdminSettingsController extends Controller
         $setting->news_ticker_status = $request->news_ticker_status;
         $setting->video_total = $request->video_total;
         $setting->video_status = $request->video_status;
+
+        $setting->top_bar_date_status = $request->top_bar_date_status;
+        $setting->top_bar_email = $request->top_bar_email;
+        $setting->top_bar_email_status = $request->top_bar_email_status;
 
         if($request->hasFile('logo')){
             $request->validate([
@@ -51,7 +57,12 @@ class AdminSettingsController extends Controller
             $request->file('favicon')->move(public_path('uploads'),$finalName);
             $setting->favicon = $finalName;
         }
+
+
+
+//        dd($setting);
         $setting->update();
+//        return $setting;
         return redirect()->route('admin_settings')->with('success','Info Updated');
     }
 }

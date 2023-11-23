@@ -146,7 +146,7 @@ Route::resource('admin/author',AdminAuthorController::class)->middleware('admin:
 
 
 Route::get('admin/settings',[AdminSettingsController::class,'adminSettings'])->name('admin_settings')->middleware('admin:admin');
-Route::post('admin/settings/update',[AdminSettingsController::class,'adminSettingsUpdate'])->name('admin_setting_update');
+Route::post('admin/settings/update',[AdminSettingsController::class,'adminSettingsUpdate'])->name('admin_setting_update')->middleware('admin:admin');
 
 Route::controller(AdminPageController::class)->prefix('admin/page')
     ->middleware('admin:admin')

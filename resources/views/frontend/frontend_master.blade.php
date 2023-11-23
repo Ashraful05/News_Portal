@@ -32,8 +32,12 @@
         <div class="row">
             <div class="col-md-6">
                 <ul>
-                    <li class="today-text">Today: January 20, 2022</li>
-                    <li class="email-text">contact@arefindev.com</li>
+                    @if($global_setting_data->top_bar_date_status == 'show')
+                        <li class="today-text">Today: {{ date('F d,Y') }}</li>
+                    @endif
+                    @if($global_setting_data->top_bar_email_status == 'show')
+                        <li class="email-text">{{ $global_setting_data->top_bar_email }}</li>
+                    @endif
                 </ul>
             </div>
             <div class="col-md-6">
