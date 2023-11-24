@@ -27,6 +27,9 @@
                                         <a class="nav-link" id="v-3-tab" data-toggle="pill" href="#v-3" role="tab" aria-controls="v-3" aria-selected="false">
                                             Top Bar
                                         </a>
+                                        <a class="nav-link" id="v-4-tab" data-toggle="pill" href="#v-4" role="tab" aria-controls="v-4" aria-selected="false">
+                                            Theme Color
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="col-xl-9 col-lg-9 col-md-8 col-sm-12">
@@ -102,6 +105,18 @@
                                                     <option value="show" @if($setting->top_bar_email_status == 'show') selected @endif>Show</option>
                                                     <option value="hide" @if($setting->top_bar_email_status == 'hide') selected @endif>Hide</option>
                                                 </select>
+                                            </div>
+                                            <!-- Top Bar End -->
+                                        </div>
+                                        <div class="pt_0 tab-pane fade" id="v-4" role="tabpanel" aria-labelledby="v-4-tab">
+
+                                            <div class="form-group mb-1">
+                                                <label>Theme Color 1</label>
+                                                <input type="text" class="form-control jscolor" name="theme_color_1" value="{{ $setting->theme_color_1 }}">
+                                            </div>
+                                            <div class="form-group mb-1">
+                                                <label>Theme Color 2</label>
+                                                <input type="text" class="form-control jscolor" name="theme_color_2" value="{{ $setting->theme_color_2 }}">
                                             </div>
                                             <!-- Top Bar End -->
                                         </div>

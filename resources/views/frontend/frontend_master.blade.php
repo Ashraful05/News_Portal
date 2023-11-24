@@ -25,6 +25,67 @@
         gtag('config', 'UA-84213520-6');
     </script>
 
+    <style>
+        .website-menu,
+        .website-menu .bg-primary,
+        .acme-news-ticker-label,
+        .search-section button[type="submit"],
+        .home-content .left .news-total-item .see-all a,
+        .nav-pills .nav-link.active,
+        .video-content,
+        .footer ul.social li a,
+        .footer input[type="submit"],
+        .scroll-top,
+        .widget .poll button,
+        .scroll-top
+        {
+            background: #{{ $global_setting_data->theme_color_1 }}!important;
+        }
+        .home-main .inner .text-inner .category span,
+        .home-main .inner .text-inner .category span a,
+        .home-content .left .news-total-item .right-side-item .right .category span,
+        .home-content .left .news-total-item .right-side-item .right .category span a,
+        .widget .news-item .right .category span,
+        .widget .news-item .right .category span a,
+        .related-news .item .category span,
+        .related-news .item .category span a,
+        .tag-section-content span
+        {
+            background: #{{ $global_setting_data->theme_color_2 }}!important;
+        }
+        .acme-news-ticker{
+            border-color: #{{ $global_setting_data->theme_color_1 }}!important;
+        }
+        ul.my-news-ticker li a.form-control,
+        .home-content .left .news-total-item .left-side h3 a:hover,
+        .home-content .left .news-total-item .right-side-item .right h2 a:hover,
+        .home-content .left .news-total-item .left-side .date-user .user a:hover,
+        .home-content .left .news-total-item .left-side .date-user .date a:hover,
+        .acme-news-ticker-box ul li a,
+        .home-content .left .news-total-item .right-side-item .right .date-user .user a:hover,
+        .home-content .left .news-total-item .right-side-item .right .date-user .date a:hover,
+        .widget .news-item .right h2 a:hover,
+        .widget .news-item .right .date-user .user a:hover,
+        .widget .news-item .right .date-user .date a:hover,
+        .video-carousel .owl-nav .owl-next,
+        .video-carousel .owl-nav .owl-prev,
+        li.breadcrumb-item a,
+        .category-page-post-item h3 a:hover,
+        .category-page-post-item .date-user .user a:hover,
+        .category-page-post-item .date-user .date a:hover,
+        .related-news .item h3 a,
+        .related-news .related-news-heading h2,
+        .related-news .item .date-user .user a:hover,
+        .related-news .item .date-user .date:hover,
+        h1, h2, h3, h4, h5, h6
+        {
+            color: #{{$global_setting_data->theme_color_1}}!important;
+        }
+        .nav-pills .nav-link.active{
+            color: #fff!important;
+        }
+    </style>
+
 </head>
 <body>
 <div class="top">

@@ -32,6 +32,9 @@ class AdminSettingsController extends Controller
         $setting->top_bar_email = $request->top_bar_email;
         $setting->top_bar_email_status = $request->top_bar_email_status;
 
+        $setting->theme_color_1 = $request->theme_color_1;
+        $setting->theme_color_2 = $request->theme_color_2;
+
         if($request->hasFile('logo')){
             $request->validate([
                 'logo'=>'image|mimes:jpg,jpeg,png,gif'
