@@ -26,6 +26,8 @@ return new class extends Migration
             $table->text('top_bar_email_status');
             $table->text('theme_color_1');
             $table->text('theme_color_2');
+            $table->text('analytic_id');
+            $table->text('analytic_id_status');
             $table->timestamps();
         });
     }

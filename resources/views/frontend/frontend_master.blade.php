@@ -17,13 +17,15 @@
     <script type="text/javascript" src="//s7.addthis.com/{{ asset('/') }}frontend/assets/js/300/addthis_widget.js#pubid=ra-6212352ed76fda0a"></script>
 
     <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-84213520-6"></script>
+    @if($global_setting_data->analytic_id_status == 'show')
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{$global_setting_data->analytic_id}}"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', 'UA-84213520-6');
+        gtag('config', '{{$global_setting_data->analytic_id}}');
     </script>
+    @endif
 
     <style>
         .website-menu,

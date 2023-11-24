@@ -35,6 +35,9 @@ class AdminSettingsController extends Controller
         $setting->theme_color_1 = $request->theme_color_1;
         $setting->theme_color_2 = $request->theme_color_2;
 
+        $setting->analytic_id = $request->analytic_id;
+        $setting->analytic_id_status = $request->analytic_id_status;
+
         if($request->hasFile('logo')){
             $request->validate([
                 'logo'=>'image|mimes:jpg,jpeg,png,gif'
