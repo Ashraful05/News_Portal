@@ -28,6 +28,7 @@ return new class extends Migration
             $table->text('theme_color_2');
             $table->text('analytic_id');
             $table->text('analytic_id_status');
+            $table->text('disqus_code');
             $table->timestamps();
         });
     }

@@ -38,6 +38,10 @@ class AdminSettingsController extends Controller
         $setting->analytic_id = $request->analytic_id;
         $setting->analytic_id_status = $request->analytic_id_status;
 
+        $setting->disqus_code = $request->disqus_code;
+
+
+
         if($request->hasFile('logo')){
             $request->validate([
                 'logo'=>'image|mimes:jpg,jpeg,png,gif'

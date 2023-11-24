@@ -33,6 +33,9 @@
                                         <a class="nav-link" id="v-5-tab" data-toggle="pill" href="#v-5" role="tab" aria-controls="v-5" aria-selected="false">
                                             Google Analytic
                                         </a>
+                                        <a class="nav-link" id="v-6-tab" data-toggle="pill" href="#v-6" role="tab" aria-controls="v-6" aria-selected="false">
+                                            Disqus Comment
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="col-xl-9 col-lg-9 col-md-8 col-sm-12">
@@ -124,7 +127,6 @@
                                             <!-- Top Bar End -->
                                         </div>
                                         <div class="pt_0 tab-pane fade" id="v-5" role="tabpanel" aria-labelledby="v-5-tab">
-
                                             <div class="form-group mb-1">
                                                 <label>Analytic ID</label>
                                                 <input type="text" class="form-control" name="analytic_id" value="{{ $setting->analytic_id }}">
@@ -135,6 +137,15 @@
                                                     <option value="show" @if($setting->analytic_id_status == 'show') selected @endif>Show</option>
                                                     <option value="hide" @if($setting->analytic_id_status == 'hide') selected @endif>Hide</option>
                                                 </select>
+                                            </div>
+                                            <!-- Top Bar End -->
+                                        </div>
+                                        <div class="pt_0 tab-pane fade" id="v-6" role="tabpanel" aria-labelledby="v-6-tab">
+                                            <div class="form-group mb-1">
+                                                <label>Disqus Code</label>
+                                                <textarea name="disqus_code" id="" cols="30" rows="10" class="form-control" style="height: 200px;">
+                                                   {{ $setting->disqus_code }}
+                                                </textarea>
                                             </div>
                                             <!-- Top Bar End -->
                                         </div>
