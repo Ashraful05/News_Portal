@@ -27,6 +27,7 @@ use App\Http\Controllers\Admin\AdminLiveChannelController;
 use App\Http\Controllers\Admin\AdminOnlinePollController;
 use App\Http\Controllers\Admin\AdminSocialMediaController;
 use App\Http\Controllers\Admin\AdminAuthorController;
+use App\Http\Controllers\Admin\AdminLanguageController;
 use App\Http\Controllers\author\AuthorPostController;
 /*
 |--------------------------------------------------------------------------
@@ -174,6 +175,7 @@ Route::controller(AdminSubscriberController::class)->prefix('admin/subscriber')
     Route::get('mail','mailToSubscriber')->name('mail_subscriber');
     Route::post('mail/submit','mailSendToSubscriber')->name('mail_send_to_subscriber');
 });
+Route::resource('admin/language',AdminLanguageController::class)->middleware('admin:admin');
 
 
 //author routes.....

@@ -79,6 +79,9 @@
             <li class="{{ Request::is('admin/socialMedia') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('socialMedia.index') }}"><i class="fas fa-hand-point-right"></i> <span>Social Media</span></a>
             </li>
+            <li class="{{ Request::is('admin/language/*') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('language.index') }}"><i class="fas fa-hand-point-right"></i> <span>All Language</span></a>
+            </li>
 
 
 {{--            <li class="nav-item dropdown active">--}}
