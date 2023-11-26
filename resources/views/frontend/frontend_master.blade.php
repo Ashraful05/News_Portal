@@ -1,3 +1,13 @@
+@if(!session()->get('session_short_name'))
+    @php
+        $current_short_name = $global_default_language_data;
+    @endphp
+@else
+    @php
+        $current_short_name = session()->get('session_short_name');
+    @endphp
+@endif
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,13 +28,13 @@
 
     <!-- Google Analytics -->
     @if($global_setting_data->analytic_id_status == 'show')
-    <script async src="https://www.googletagmanager.com/gtag/js?id={{$global_setting_data->analytic_id}}"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', '{{$global_setting_data->analytic_id}}');
-    </script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{$global_setting_data->analytic_id}}"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '{{$global_setting_data->analytic_id}}');
+        </script>
     @endif
 
     <style>
@@ -119,11 +129,14 @@
                     @endif
                     <li>
                         <div class="language-switch">
-                            <select name="">
-                                <option value="">English</option>
-                                <option value="">Hindi</option>
-                                <option value="">Arabic</option>
-                            </select>
+                            <form action="{{ route('front_language_switch') }}" method="post">
+                                @csrf
+                                <select name="language_short_name" onchange="this.form.submit();">
+                                    @foreach($global_language_data as $data)
+                                        <option value="{{ $data->language_short_name }}" @if($data->language_short_name == $current_short_name) selected @endif>{{ $data->language_name }}</option>
+                                    @endforeach
+                                </select>
+                            </form>
                         </div>
                     </li>
                 </ul>

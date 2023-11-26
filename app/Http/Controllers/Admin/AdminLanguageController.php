@@ -50,6 +50,10 @@ class AdminLanguageController extends Controller
             'language_short_name'=>$request->language_short_name,
             'is_default'=>$request->is_default
         ]);
+
+        $test_data = file_get_contents(resource_path('lang/sample.json'));
+        file_put_contents(resource_path('lang/'.$request->language_short_name.'.json'),$test_data);
+
         return redirect()->route('language.index')->with('success','Data Saved!!');
     }
 
