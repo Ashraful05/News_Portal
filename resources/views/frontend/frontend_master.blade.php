@@ -7,6 +7,13 @@
         $current_short_name = session()->get('session_short_name');
     @endphp
 @endif
+{{--    {{ $current_short_name }}--}}
+{{--    @php--}}
+{{--        $jsonData = json_decode(file_get_contents(resource_path('lang/'.$current_short_name.'.json')));--}}
+{{--        foreach ($jsonData as $key=>$value){--}}
+{{--            define($key,$value);--}}
+{{--        }--}}
+{{--    @endphp--}}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -106,7 +113,7 @@
             <div class="col-md-6">
                 <ul>
                     @if($global_setting_data->top_bar_date_status == 'show')
-                        <li class="today-text">Today: {{ date('F d,Y') }}</li>
+                        <li class="today-text">{{TODAY}}: {{ date('F d,Y') }}</li>
                     @endif
                     @if($global_setting_data->top_bar_email_status == 'show')
                         <li class="email-text">{{ $global_setting_data->top_bar_email }}</li>

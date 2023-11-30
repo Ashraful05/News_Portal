@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\front;
 
+use app\Helper\Helpers;
 use App\Http\Controllers\Controller;
 use App\Mail\Websitemail;
 use App\Models\Admin;
@@ -21,37 +22,44 @@ class FrontPageController extends Controller
 {
     public function aboutPage()
     {
+        Helpers::read_json();
         $pageData = Page::where('id',1)->first();
         return view('frontend.about',compact('pageData'));
     }
     public function faqPage()
     {
+        Helpers::read_json();
         $pageData = Page::where('id',1)->first();
         $faqData = Faq::get();
         return view('frontend.faq',compact('pageData','faqData'));
     }
     public function termsPage()
     {
+        Helpers::read_json();
         $pageData = Page::where('id',1)->first();
         return view('frontend.terms',compact('pageData'));
     }
     public function privacyPage()
     {
+        Helpers::read_json();
         $pageData = Page::where('id',1)->first();
         return view('frontend.privacy',compact('pageData'));
     }
     public function disclaimerPage()
     {
+        Helpers::read_json();
         $pageData = Page::where('id',1)->first();
         return view('frontend.disclaimer',compact('pageData'));
     }
     public function loginPage()
     {
+        Helpers::read_json();
         $pageData = Page::where('id',1)->first();
         return view('frontend.login',compact('pageData'));
     }
     public function loginSubmit(Request $request)
     {
+        Helpers::read_json();
         $request->validate([
             'email'=>'required|email',
             'password'=>'required'
@@ -68,14 +76,17 @@ class FrontPageController extends Controller
     }
     public function authorHome()
     {
+        Helpers::read_json();
         return view('author.home');
     }
     public function authorProfileEdit()
     {
+        Helpers::read_json();
         return view('author.author_profile_edit');
     }
     public function authorProfileUpdate(Request $request)
     {
+        Helpers::read_json();
         $authorData = Author::where('email',Auth::guard('author')->user()->email)->first();
 
         $request->validate([
@@ -115,16 +126,19 @@ class FrontPageController extends Controller
     }
     public function AuthorLogout()
     {
+        Helpers::read_json();
         Auth::guard('author')->logout();
         return redirect()->route('front_login');
     }
     public function contactPage()
     {
+        Helpers::read_json();
         $pageData = Page::where('id',1)->first();
         return view('frontend.contact',compact('pageData'));
     }
     public function contactEmailSubmit(Request $request)
     {
+        Helpers::read_json();
         $validator = Validator::make($request->all(),[
             'name'=>'required',
             'email'=>'required',
@@ -146,6 +160,7 @@ class FrontPageController extends Controller
     }
     public function onlinePollSubmit(Request $request,$id)
     {
+        Helpers::read_json();
         $onlinePollVote = OnlinePoll::where('id',$request->id)->first();
         if($request->vote == 'yes')
         {
@@ -166,15 +181,18 @@ class FrontPageController extends Controller
 
     public function onlinePollPreviousResult()
     {
+        Helpers::read_json();
         $onlinePollData = OnlinePoll::orderby('id','desc')->get();
         return view('frontend.previous_poll_result',compact('onlinePollData'));
     }
     public function ForgetPassword()
     {
+        Helpers::read_json();
         return view('frontend.forget_password');
     }
     public function ForgetPasswordSubmit(Request $request)
     {
+        Helpers::read_json();
         $request->validate([
             'email'=>'required|email'
         ]);
@@ -196,6 +214,7 @@ class FrontPageController extends Controller
     }
     public function ResetPassword($token,$email)
     {
+        Helpers::read_json();
         $data = Author::where(['token'=>$token,'email'=>$email])->first();
         if(!$data){
             return redirect()->route('front_login');
@@ -204,6 +223,7 @@ class FrontPageController extends Controller
     }
     public function ResetPasswordSubmit(Request $request)
     {
+        Helpers::read_json();
         $request->validate([
             'password'=>'required',
             'retype_password' =>'required|same:password'

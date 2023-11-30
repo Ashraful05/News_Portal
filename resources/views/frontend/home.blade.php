@@ -2,13 +2,30 @@
 @section('title','Home')
 @section('main_content')
 
+{{--    @if(!session()->get('session_short_name'))--}}
+{{--        @php--}}
+{{--            $current_short_name = $global_default_language_data;--}}
+{{--        @endphp--}}
+{{--    @else--}}
+{{--        @php--}}
+{{--            $current_short_name = session()->get('session_short_name');--}}
+{{--        @endphp--}}
+{{--    @endif--}}
+{{--    --}}{{--    {{ $current_short_name }}--}}
+{{--    @php--}}
+{{--        $jsonData = json_decode(file_get_contents(resource_path('lang/'.$current_short_name.'.json')));--}}
+{{--        foreach ($jsonData as $key=>$value){--}}
+{{--            define($key,$value);--}}
+{{--        }--}}
+{{--    @endphp--}}
+
     @if($settingData->news_ticker_status == 'show')
         <div class="news-ticker-item">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="acme-news-ticker">
-                            <div class="acme-news-ticker-label">Latest News</div>
+                            <div class="acme-news-ticker-label">{{LATEST_NEWS}}</div>
                             <div class="acme-news-ticker-box">
                                 <ul class="my-news-ticker">
                                     @php $i=0; @endphp

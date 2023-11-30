@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\front;
 
+use app\Helper\Helpers;
 use App\Http\Controllers\Controller;
 use App\Models\NewsPosts;
 use Illuminate\Http\Request;
@@ -10,6 +11,7 @@ class FrontArchiveController extends Controller
 {
     public function showArchive(Request $request)
     {
+        Helpers::read_json();
         $temp_data = explode('-',$request->archive_month_year);
         $month = $temp_data[0];
         $year = $temp_data[1];
@@ -19,6 +21,7 @@ class FrontArchiveController extends Controller
     }
     public function showArchiveWithPagination($year,$month)
     {
+        Helpers::read_json();
         $postDataArchive = NewsPosts::whereMonth('created_at','=',$month)->whereYear('created_at','=',$year)->paginate(2);
         foreach ($postDataArchive as $item){
             $ts = strtotime($item->created_at);

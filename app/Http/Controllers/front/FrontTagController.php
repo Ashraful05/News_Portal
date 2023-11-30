@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\front;
 
+use app\Helper\Helpers;
 use App\Http\Controllers\Controller;
 use App\Models\NewsPosts;
 use App\Models\Tag;
@@ -11,6 +12,7 @@ class FrontTagController extends Controller
 {
     public function tagWisePost($tag_name)
     {
+        Helpers::read_json();
         $tagData = Tag::where('tag_name',$tag_name)->get();
 
         $all_post_ids = [];

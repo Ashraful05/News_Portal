@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\front;
 
+use app\Helper\Helpers;
 use App\Http\Controllers\Controller;
 use App\Mail\Websitemail;
 use App\Models\Subscriber;
@@ -13,6 +14,7 @@ class SubscriberController extends Controller
 {
     public function index(Request $request)
     {
+        Helpers::read_json();
         $validator = Validator::make($request->all(),[
             'email'=>'required|email',
         ]);
@@ -40,6 +42,7 @@ class SubscriberController extends Controller
     }
     public function SubscriberVerification($token,$email)
     {
+        Helpers::read_json();
         $data = Subscriber::where(['token'=>$token,'email'=>$email])->first();
         if($data){
 //            echo 'ok';

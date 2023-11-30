@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\front;
 
+use App\Helper\Helpers;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\HomeAdvertisement;
@@ -16,6 +17,7 @@ class HomeController extends Controller
 {
     public function FrontHome()
     {
+        Helpers::read_json();
         $homeData = HomeAdvertisement::where('id',1)->first();
         $settingData = Setting::where('id',1)->first();
         $postData = NewsPosts::with('rSubCategory')->orderBy('id','desc')->get();
@@ -27,10 +29,12 @@ class HomeController extends Controller
     }
     public function FrontAbout()
     {
+        Helpers::read_json();
         return view('frontend.about');
     }
     public function subCategoryByCategoryWithAjax($id)
     {
+        Helpers::read_json();
         $sub_category_data = SubCategory::where('category_id',$id)->get();
 //        $response = '<option value="">Select SubCategory</option>';
         $response = '';
@@ -41,6 +45,7 @@ class HomeController extends Controller
     }
     public function searchResult(Request $request)
     {
+        Helpers::read_json();
         $postData = NewsPosts::with('rSubCategory')->orderby('id','desc');
         if($request->text_portion != ''){
             $postData = $postData->where('post_title','like','%'.$request->text_portion.'%');

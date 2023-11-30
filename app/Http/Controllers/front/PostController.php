@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\front;
 
+use app\Helper\Helpers;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\Author;
@@ -13,6 +14,7 @@ class PostController extends Controller
 {
     public function NewsDetails($id)
     {
+        Helpers::read_json();
         $tags = Tag::where('post_id',$id)->get();
         $newsDetail = NewsPosts::with('rSubCategory')->where('id',$id)->first();
         if($newsDetail->author_id == 0)
