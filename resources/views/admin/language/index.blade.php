@@ -31,7 +31,7 @@
                                         <td>{{ $data->language_short_name }}</td>
                                         <td>{{ $data->is_default }}</td>
                                         <td>
-                                            <a href="" class="btn btn-success">Update Details</a>
+                                            <a href="{{ route('admin_language_update_detail',$data->id) }}" class="btn btn-success">Update Details</a>
                                         </td>
                                         <td class="pt_10 pb_10">
                                             <a href="{{ route('language.edit',$data->id) }}" class="btn btn-primary" title="Edit Data"><i class="fas fa-edit"></i></a>

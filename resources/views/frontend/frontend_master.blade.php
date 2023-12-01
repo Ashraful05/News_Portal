@@ -9,7 +9,7 @@
 @endif
 {{--    {{ $current_short_name }}--}}
 {{--    @php--}}
-{{--        $jsonData = json_decode(file_get_contents(resource_path('lang/'.$current_short_name.'.json')));--}}
+{{--        $jsonData = json_decode(file_get_contents(resource_path('languages/'.$current_short_name.'.json')));--}}
 {{--        foreach ($jsonData as $key=>$value){--}}
 {{--            define($key,$value);--}}
 {{--        }--}}

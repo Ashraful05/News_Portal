@@ -39,7 +39,7 @@ class AdminLanguageController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-           'language_name'=>'required',
+           'language_name'=>'required|unique:languages',
            'language_short_name'=>'required',
         ]);
         if($request->is_default == 'yes'){
@@ -51,8 +51,8 @@ class AdminLanguageController extends Controller
             'is_default'=>$request->is_default
         ]);
 
-        $test_data = file_get_contents(resource_path('lang/sample.json'));
-        file_put_contents(resource_path('lang/'.$request->language_short_name.'.json'),$test_data);
+        $test_data = file_get_contents(resource_path('languages/sample.json'));
+        file_put_contents(resource_path('languages/'.$request->language_short_name.'.json'),$test_data);
 
         return redirect()->route('language.index')->with('success','Data Saved!!');
     }
@@ -93,7 +93,6 @@ class AdminLanguageController extends Controller
         }
         $language->update([
            'language_name'=>$request->language_name,
-            'language_short_name'=>$request->language_short_name,
             'is_default'=>$request->is_default
         ]);
         return redirect()->route('language.index')->with('success','Data Updated!!');
@@ -110,7 +109,37 @@ class AdminLanguageController extends Controller
         if($language->is_default == 'yes'){
             DB::table('languages')->where('id',1)->update(['is_default'=>'yes']);
         }
+        unlink(resource_path('languages/'.$language->language_short_name.'.json'));
         $language->delete();
         return redirect()->route('language.index')->with('error','Data Deleted!!');
     }
+
+    public function languageUpdateDetail($id)
+    {
+        $languageData = Language::where('id',$id)->first();
+        $languageJsonData = json_decode(file_get_contents(resource_path('languages/'.$languageData->language_short_name.'.json')));
+        return view('admin.language.update_detail',compact('languageJsonData','languageData'));
+    }
+    public function languageUpdateDetailSubmit(Request $request,$id)
+    {
+        $languageData = Language::where('id',$id)->first();
+        $array1=[];
+        $array2=[];
+        foreach ($request->arr_key as $value){
+            $array1[] = $value;
+        }
+        foreach ($request->arr_value as $value){
+            $array2[] = $value;
+        }
+
+        for($i=0;$i<count($array1);$i++){
+            $data[$array1[$i]] = $array2[$i];
+        }
+        $after_encode = json_encode($data,JSON_PRETTY_PRINT);
+        file_put_contents(resource_path('languages/'.$languageData->language_short_name.'.json'),$after_encode);
+        return redirect()->route('language.index')->with('success','Language Value Updated!!!');
+
+    }
+
+
 }

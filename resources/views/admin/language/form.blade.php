@@ -30,12 +30,16 @@
                                                 <input type="text" name="language_name" value="{{ old('language_name',$language->language_name) }}" class="form-control">
                                             </div>
                                         </div>
+                                        @if($language->exists)
+
+                                        @else
                                         <div class="form-group mb-3">
                                             <label for="">Language Short Name</label>
                                             <div>
-                                                <input type="text" name="language_short_name" value="{{ old('language_short_name',$language->language_short_name) }}" class="form-control">
+                                                <input type="text" name="language_short_name" class="form-control">
                                             </div>
                                         </div>
+                                        @endif
 
                                         @if($language->exists)
                                             <div class="form-group mb-1">

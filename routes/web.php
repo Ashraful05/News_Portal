@@ -178,6 +178,8 @@ Route::controller(AdminSubscriberController::class)->prefix('admin/subscriber')
     Route::post('mail/submit','mailSendToSubscriber')->name('mail_send_to_subscriber');
 });
 Route::resource('admin/language',AdminLanguageController::class)->middleware('admin:admin');
+Route::get('admin/language/update-detail/{id}',[AdminLanguageController::class,'languageUpdateDetail'])->name('admin_language_update_detail')->middleware('admin:admin');
+Route::post('admin/language/update-submit/{id}',[AdminLanguageController::class,'languageUpdateDetailSubmit'])->name('admin_language_update_detail_submit')->middleware('admin:admin');
 
 
 //author routes.....
