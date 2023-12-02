@@ -1,4 +1,17 @@
 {
     "TODAY": "Today",
-    "LATEST_NEWS": "Latest News"
+    "LATEST_NEWS": "Latest News",
+    "FOOTER_COLUMN_1_HEADING": "About Us",
+    "FOOTER_COLUMN_1_TEXT": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+    "FOOTER_COLUMN_2_HEADING": "Useful Links",
+    "HOME": "Home",
+    "FOOTER_COLUMN_3_HEADING": "Contact",
+    "FOOTER_COLUMN_4_HEADING": "Newsletter",
+    "FOOTER_ADDRESS": "34 Antiger Lane, nPK Lane, USA, 12937",
+    "FOOTER_EMAIL": "contact@arefindev.com",
+    "FOOTER_PHONE": "122-222-1212",
+    "NEWS_LETTER_TEXT": "In order to get the latest news and other great items, please subscribe us here:",
+    "EMAIL_ADDRESS": "Email Address",
+    "SUBSCRIBE_NOW": "Subscribe Now",
+    "COPYRIGHT_TEXT": "Copyright 2022, AshrafDev. All Rights Reserved."
 }
