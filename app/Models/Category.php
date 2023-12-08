@@ -16,4 +16,8 @@ class Category extends Model
             ->where('show_on_menu','show')
             ->orderBy('sub_category_order','asc');
     }
+    public function rLanguage()
+    {
+        return $this->belongsTo(Language::class,'language_id','id');
+    }
 }

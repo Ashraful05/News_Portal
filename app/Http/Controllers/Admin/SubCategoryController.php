@@ -16,7 +16,7 @@ class SubCategoryController extends Controller
      */
     public function index()
     {
-        $subCategories = SubCategory::with('rCategory')->get();
+        $subCategories = SubCategory::with('rCategory.rLanguage')->get();
         return view('admin.subcategory.index',compact('subCategories'));
     }
 
@@ -52,7 +52,8 @@ class SubCategoryController extends Controller
             'show_on_menu'=>$request->show_on_menu,
             'show_on_home_page'=>$request->show_on_home_page,
             'sub_category_order'=>$request->sub_category_order,
-            'category_id'=>$request->category_id
+            'category_id'=>$request->category_id,
+            'language_id'=>$request->language_id,
         ]);
         return redirect()->route('subcategory.index')->with('success','Data Saved Successfully!!');
     }
@@ -103,7 +104,8 @@ class SubCategoryController extends Controller
             'show_on_menu'=>$request->show_on_menu,
             'show_on_home_page'=>$request->show_on_home_page,
             'sub_category_order'=>$request->sub_category_order,
-            'category_id'=>$request->category_id
+            'category_id'=>$request->category_id,
+            'language_id'=>$request->language_id,
         ]);
         return redirect()->route('subcategory.index')->with('success','Data Updated Successfully!!');
     }

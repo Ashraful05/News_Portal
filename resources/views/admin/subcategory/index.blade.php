@@ -17,6 +17,7 @@
                                     <th>SL</th>
                                     <th>Category Name</th>
                                     <th>SubCategory Name</th>
+                                    <th>Language Name</th>
                                     <th>SubCategory Order</th>
                                     <th>Show On Menu</th>
                                     <th>Show On Home Page</th>
@@ -29,6 +30,7 @@
                                         <td>{{ ++$row }}</td>
                                         <td>{{ $data->rCategory->category_name }}</td>
                                         <td>{{ $data->sub_category_name }}</td>
+                                        <td>{{ $data->rCategory->rLanguage->language_name }}</td>
                                         <td>{{ $data->sub_category_order }}</td>
                                         <td>{{ $data->show_on_menu }}</td>
                                         <td>{{ $data->show_on_home_page }}</td>

@@ -18,6 +18,7 @@
                                     <th>Category Name</th>
                                     <th>Show On Menu</th>
                                     <th>Category Order</th>
+                                    <th>Category Language</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -28,6 +29,7 @@
                                         <td>{{ $data->category_name }}</td>
                                         <td>{{ $data->show_on_menu }}</td>
                                         <td>{{ $data->category_order }}</td>
+                                        <td>{{ $data->rLanguage->language_name }}</td>
                                         <td class="pt_10 pb_10">
                                             <a href="{{ route('admin_category_edit',$data->id) }}" class="btn btn-primary">Edit</a>
                                             <a href="{{ route('admin_category_delete',$data->id) }}" class="btn btn-danger" onClick="return confirm('Are you sure?');">Delete</a>

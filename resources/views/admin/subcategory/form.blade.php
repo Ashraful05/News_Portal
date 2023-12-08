@@ -42,6 +42,25 @@
                                         </div>
                                         @if($subcategory->exists)
                                             <div class="form-group mb-3">
+                                                <label for="">SubCategory Language</label>
+                                                <select name="language_id" id="" class="form-control">
+                                                    @foreach($global_language_data as $data)
+                                                        <option value="{{ $data->id }}" @if($data->id == $subcategory->language_id) selected @endif>{{ $data->language_name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        @else
+                                            <div class="form-group mb-3">
+                                                <label for="">SubCategory Language</label>
+                                                <select name="language_id" id="" class="form-control">
+                                                    @foreach($global_language_data as $data)
+                                                        <option value="{{ $data->id }}">{{ $data->language_name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        @endif
+                                        @if($subcategory->exists)
+                                            <div class="form-group mb-3">
                                                 <label>Show On Menu?</label>
                                                 <select name="show_on_menu" class="form-control">
                                                     <option value="show" @if($subcategory->show_on_menu=='show') selected @endif>Show</option>

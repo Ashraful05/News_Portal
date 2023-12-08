@@ -31,6 +31,16 @@
                                     <input type="text" name="category_order" class="form-control">
                                 </div>
                             </div>
+                            <div class="form-group mb-3">
+                                <label for="">Category Language</label>
+                                <select name="language_id" id="" class="form-control">
+                                    <option value="" selected disabled>Select Language</option>
+                                    @foreach($global_language_data as $data)
+                                        <option value="{{ $data->id }}">{{ $data->language_name }}</option>
+                                    @endforeach
+
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>

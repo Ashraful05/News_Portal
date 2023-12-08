@@ -31,6 +31,14 @@
                                     <input type="text" name="category_order" value="{{ $category->category_order }}" class="form-control">
                                 </div>
                             </div>
+                            <div class="form-group mb-3">
+                                <label for="">Select Category Language</label>
+                                <select name="language_id" id="" class="form-control">
+                                    @foreach($global_language_data as $data)
+                                        <option value="{{ $data->id }}" @if($data->id == $category->language_id) selected @endif>{{ $data->language_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
