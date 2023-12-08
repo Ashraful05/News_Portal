@@ -24,7 +24,7 @@ class NewsPostsController extends Controller
      */
     public function index()
     {
-        $posts = NewsPosts::with('rSubCategory')->get();
+        $posts = NewsPosts::with('rSubCategory.rCategory','rLanguage')->get();
 //        return $posts;
         return view('admin.news_post.index',compact('posts'));
     }
@@ -73,6 +73,7 @@ class NewsPostsController extends Controller
             'is_share'=>$request->is_share,
             'is_comment'=>$request->is_comment,
             'post_photo'=>$finalName,
+            'language_id'=>$request->language_id
         ]);
 
         if($request->tags != ''){
@@ -179,6 +180,7 @@ class NewsPostsController extends Controller
                 'admin_id'=>Auth::guard('admin')->user()->id,
                 'is_share'=>$request->is_share,
                 'is_comment'=>$request->is_comment,
+                'language_id'=>$request->language_id
             ]);
         }else{
             $newspost->update([
@@ -190,6 +192,7 @@ class NewsPostsController extends Controller
                 'admin_id'=>Auth::guard('admin')->user()->id,
                 'is_share'=>$request->is_share,
                 'is_comment'=>$request->is_comment,
+                'language_id'=>$request->language_id
             ]);
         }
         if(!empty($request->tags)){

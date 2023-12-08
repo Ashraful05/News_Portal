@@ -42,12 +42,32 @@
                                                 <input type="text" name="post_title" value="{{ old('post_title',$newspost->post_title) }}" class="form-control">
                                             </div>
                                         </div>
+                                        @if($newspost->exists)
+                                            <div class="form-group mb-3">
+                                                <label for="">SubCategory Language</label>
+                                                <select name="language_id" id="" class="form-control">
+                                                    @foreach($global_language_data as $data)
+                                                        <option value="{{ $data->id }}" @if($data->id == $newspost->language_id) selected @endif>{{ $data->language_name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        @else
+                                            <div class="form-group mb-3">
+                                                <label for="">SubCategory Language</label>
+                                                <select name="language_id" id="" class="form-control">
+                                                    @foreach($global_language_data as $data)
+                                                        <option value="{{ $data->id }}">{{ $data->language_name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        @endif
                                         <div class="form-group mb-3">
                                             <label>Post Details</label>
                                             <div>
                                                 <textarea name="post_detail" id="" cols="30" rows="10" class="form-control snote" >{!! old('post_detail',$newspost->post_detail) !!}  </textarea>
                                             </div>
                                         </div>
+
                                         @if($newspost->exists)
                                             <div class="form-group mb-3">
                                                 <label>Is Shareable?</label>

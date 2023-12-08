@@ -19,6 +19,7 @@
                                     <th>Post Title</th>
                                     <th>Post Category</th>
                                     <th>Post SubCategory</th>
+                                    <th>Post Language</th>
                                     <th>Author Name</th>
                                     <th>Admin Name</th>
                                     <th>Action</th>
@@ -40,9 +41,10 @@
                                         <td>{{ $data->post_title }}</td>
                                         <td>{{ $data->rSubCategory->rCategory->category_name }}</td>
                                         <td>{{ $data->rSubCategory->sub_category_name }}</td>
+                                        <td>{{ $data->rLanguage->language_name }}</td>
                                         <td>
                                             @if($data->author_id != 0)
-                                                {{ Auth::guard('author')->user()->name }}
+                                                {{ \App\Models\Author::where('id',$data->author_id)->first()->name }}
                                             @else
                                                 <p class="text-danger">No Author Found!</p>
                                             @endif
