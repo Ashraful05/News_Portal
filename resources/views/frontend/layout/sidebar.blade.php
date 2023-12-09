@@ -1,3 +1,16 @@
+@if(!session()->get('session_short_name'))
+    @php
+        $current_short_name = $global_default_language_data;
+    @endphp
+@else
+    @php
+        $current_short_name = session()->get('session_short_name');
+    @endphp
+@endif
+@php
+    $currentLanguageId = \App\Models\Language::where('language_short_name',$current_short_name)->first()->id;
+@endphp
+
 <div class="sidebar">
 
     <div class="widget">
@@ -22,6 +35,23 @@
                 $tags = \App\Models\Tag::select('tag_name')->distinct()->get();
             @endphp
             @foreach($tags as $tag)
+                @php
+                    $count = 0;
+                    $allData = \App\Models\Tag::where('tag_name',$tag->tag_name)->get();
+                    $allPostIds = [];
+                    foreach ($allData as $tagdata)
+                        {
+                            $temp = \App\Models\NewsPosts::where('id',$tagdata->post_id)->where('language_id',$currentLanguageId)->count();
+                            if($temp > 0){
+                                $count = 1;
+                                break;
+                            }
+                        }
+                    if($count == 0){
+                        continue;
+                    }
+
+                @endphp
                 <div class="tag-item">
                     <a href="{{ route('show_tag_post',$tag->tag_name) }}"><span class="badge bg-secondary">{{ $tag->tag_name }}</span></a>
                 </div>

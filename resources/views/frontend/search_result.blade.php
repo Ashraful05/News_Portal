@@ -8,7 +8,7 @@
                     <h2>Search Result</h2>
                     <nav class="breadcrumb-container">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('front_home') }}">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('front_home') }}">{{HOME}}</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Search Result</li>
                         </ol>
                     </nav>
