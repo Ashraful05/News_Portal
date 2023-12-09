@@ -16,6 +16,7 @@
                                 <tr>
                                     <th>SL</th>
                                     <th>Heading</th>
+                                    <th>Language</th>
                                     <th>Video</th>
                                     <th>Action</th>
                                 </tr>
@@ -25,6 +26,7 @@
                                     <tr>
                                         <td>{{ ++$row }}</td>
                                         <td>{{ $data->heading }}</td>
+                                        <td>{{ $data->rLanguage->language_name }}</td>
                                         <td>
                                             <iframe style="width: 300px; height: 220px;" width="560" height="315"
                                                     src="https://www.youtube.com/embed/{{ $data['video_id'] }}"

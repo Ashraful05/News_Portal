@@ -93,7 +93,10 @@
     </div>
 
     <div class="widget">
-        @foreach($global_live_channel as $data)
+        @php
+            $liveChannelData = \App\Models\LiveChannel::where('language_id',$currentLanguageId)->get();
+        @endphp
+        @foreach($liveChannelData as $data)
             <div class="live-channel">
                 <div class="live-channel-heading">
                     <h2>{{ $data->heading }}</h2>

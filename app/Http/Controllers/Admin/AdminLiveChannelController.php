@@ -15,7 +15,7 @@ class AdminLiveChannelController extends Controller
      */
     public function index()
     {
-        $liveChannels = LiveChannel::get();
+        $liveChannels = LiveChannel::with('rLanguage')->get();
         return view('admin.live_channel.index',compact('liveChannels'));
     }
 
@@ -43,7 +43,8 @@ class AdminLiveChannelController extends Controller
         ]);
         LiveChannel::create([
            'heading'=>$request->heading,
-           'video_id'=>$request->video_id
+           'video_id'=>$request->video_id,
+            'language_id'=>$request->language_id
         ]);
         return redirect()->route('liveChannel.index')->with('success','Data saved successfully!!');
     }
@@ -85,7 +86,8 @@ class AdminLiveChannelController extends Controller
         ]);
         $liveChannel->update([
             'heading'=>$request->heading,
-            'video_id'=>$request->video_id
+            'video_id'=>$request->video_id,
+            'language_id'=>$request->language_id
         ]);
         return redirect()->route('liveChannel.index')->with('success','Data Updated successfully!!');
     }
