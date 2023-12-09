@@ -121,7 +121,13 @@
             </ul>
             <div class="tab-content" id="pills-tabContent">
                 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                    @foreach($global_recent_news_data as $data)
+                    @php
+                        $recentNewsData = \App\Models\NewsPosts::orderby('id','desc')
+                                           ->where('language_id',$currentLanguageId)
+                                           ->limit(4)
+                                           ->get();
+                    @endphp
+                    @foreach($recentNewsData as $data)
                         <div class="news-item">
                             <div class="left">
                                 <img src="{{ asset('uploads/'.$data->post_photo) }}" alt="">
@@ -158,7 +164,13 @@
 
                 </div>
                 <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                    @foreach($global_popular_news_data as $data)
+                    @php
+                        $popularNewsData = \App\Models\NewsPosts::orderby('visitors','desc')
+                                            ->where('language_id',$currentLanguageId)
+                                            ->limit(4)
+                                            ->get();
+                    @endphp
+                    @foreach($popularNewsData as $data)
                         <div class="news-item">
                             <div class="left">
                                 <img src="{{ asset('uploads/'.$data->post_photo) }}" alt="">

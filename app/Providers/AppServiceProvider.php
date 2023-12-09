@@ -43,8 +43,8 @@ class AppServiceProvider extends ServiceProvider
         $globalCategories = Category::with('rSubCategory')->where('show_on_menu','show')->orderby('category_order','asc')->get();
         $globalPageData = Page::where('id',1)->first();
         $liveChannelData = LiveChannel::get();
-        $recentNewsData = NewsPosts::orderby('id','desc')->limit(4)->get();
-        $popularNewsData = NewsPosts::orderby('visitors','desc')->limit(4)->get();
+
+
         $onlinePollData = OnlinePoll::orderby('id','desc')->first();
         $socialMedia = SocialMedia::get();
         $settingsData = Setting::where('id',1)->first();
@@ -57,8 +57,8 @@ class AppServiceProvider extends ServiceProvider
         view()->share('global_categories',$globalCategories);
         view()->share('global_pages',$globalPageData);
         view()->share('global_live_channel',$liveChannelData);
-        view()->share('global_recent_news_data',$recentNewsData);
-        view()->share('global_popular_news_data',$popularNewsData);
+//        view()->share('global_recent_news_data',$recentNewsData);
+//        view()->share('global_popular_news_data',$popularNewsData);
         view()->share('global_online_poll_data',$onlinePollData);
         view()->share('global_social_media',$socialMedia);
         view()->share('global_setting_data',$settingsData);
