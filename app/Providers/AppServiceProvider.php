@@ -45,7 +45,7 @@ class AppServiceProvider extends ServiceProvider
 
 
 
-        $onlinePollData = OnlinePoll::orderby('id','desc')->first();
+
         $socialMedia = SocialMedia::get();
         $settingsData = Setting::where('id',1)->first();
         $languageData = Language::get();
@@ -56,7 +56,7 @@ class AppServiceProvider extends ServiceProvider
         view()->share('global_sidebar_bottom_ad',$sidebarBottomAd);
         view()->share('global_categories',$globalCategories);
         view()->share('global_pages',$globalPageData);
-        view()->share('global_online_poll_data',$onlinePollData);
+//        view()->share('global_online_poll_data',$onlinePollData);
         view()->share('global_social_media',$socialMedia);
         view()->share('global_setting_data',$settingsData);
         view()->share('global_language_data',$languageData);

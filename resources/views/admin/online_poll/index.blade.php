@@ -16,6 +16,7 @@
                                 <tr>
                                     <th>SL</th>
                                     <th>Question</th>
+                                    <th>Poll Language</th>
                                     <th>Yes Vote</th>
                                     <th>No Vote</th>
                                     <th>Action</th>
@@ -26,6 +27,7 @@
                                     <tr>
                                         <td>{{ ++$row }}</td>
                                         <td>{{ $data->question }}</td>
+                                        <td>{{ $data->rLanguage->language_name }}</td>
                                         <td>{{ $data->yes_vote }}</td>
                                         <td>{{ $data->no_vote }}</td>
 

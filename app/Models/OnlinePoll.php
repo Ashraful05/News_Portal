@@ -9,4 +9,9 @@ class OnlinePoll extends Model
 {
     use HasFactory;
     protected $guarded=[];
+
+    public function rLanguage()
+    {
+        return $this->belongsTo(Language::class,'language_id','id');
+    }
 }

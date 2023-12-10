@@ -15,7 +15,7 @@ class AdminOnlinePollController extends Controller
      */
     public function index()
     {
-        $polls = OnlinePoll::orderby('id','desc')->get();
+        $polls = OnlinePoll::with('rLanguage')->orderby('id','desc')->get();
         return view('admin.online_poll.index',compact('polls'));
     }
 
@@ -43,7 +43,8 @@ class AdminOnlinePollController extends Controller
         OnlinePoll::create([
            'question'=>$request->question,
             'yes_vote'=>0,
-            'no_vote'=>0
+            'no_vote'=>0,
+            'language_id'=>$request->language_id
         ]);
         return redirect()->route('onlinePoll.index')->with('success','Data Saved Successfully!');
     }
@@ -81,7 +82,8 @@ class AdminOnlinePollController extends Controller
     {
         $request->validate(['question']);
         $onlinePoll->update([
-           'question'=>$request->question
+           'question'=>$request->question,
+            'language_id'=>$request->language_id
         ]);
         return redirect()->route('onlinePoll.index')->with('success','Data Updated!!');
     }

@@ -8,6 +8,7 @@ use App\Mail\Websitemail;
 use App\Models\Admin;
 use App\Models\Author;
 use App\Models\Faq;
+use App\Models\Language;
 use App\Models\OnlinePoll;
 use App\Models\Page;
 use Illuminate\Http\Request;
@@ -161,7 +162,8 @@ class FrontPageController extends Controller
     public function onlinePollSubmit(Request $request,$id)
     {
         Helpers::read_json();
-        $onlinePollVote = OnlinePoll::where('id',$request->id)->first();
+
+        $onlinePollVote = OnlinePoll::with('rLanguage')->where('id',$request->id)->first();
         if($request->vote == 'yes')
         {
             $onlinePollVote->yes_vote += 1;
@@ -182,7 +184,13 @@ class FrontPageController extends Controller
     public function onlinePollPreviousResult()
     {
         Helpers::read_json();
-        $onlinePollData = OnlinePoll::orderby('id','desc')->get();
+        if(!session()->get('session_short_name')){
+            $current_short_name = Language::where('is_default','yes')->first()->language_short_name;
+        }else{
+            $current_short_name = session()->get('session_short_name');
+        }
+        $currentLanguageId = Language::where('language_short_name',$current_short_name)->first()->id;
+        $onlinePollData = OnlinePoll::where('language_id',$currentLanguageId)->orderby('id','desc')->get();
         return view('frontend.previous_poll_result',compact('onlinePollData'));
     }
     public function ForgetPassword()

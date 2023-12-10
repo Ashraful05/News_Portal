@@ -230,25 +230,28 @@
         <div class="poll-heading">
             <h2>Online Poll</h2>
         </div>
+        @php
+            $onlinePollData = \App\Models\OnlinePoll::where('language_id',$currentLanguageId)->orderby('id','desc')->first();
+        @endphp
         <div class="poll">
             <div class="question">
-                {{ $global_online_poll_data->question }}
+                {{ $onlinePollData->question }}
             </div>
 
             @php
-                if( $global_online_poll_data->yes_vote > 0 || $global_online_poll_data->no_vote > 0)
+                if( $onlinePollData->yes_vote > 0 || $onlinePollData->no_vote > 0)
                 {
-                    $totalVote = $global_online_poll_data->yes_vote + $global_online_poll_data->no_vote;
-                   $totalYesVotePercentage = floor(($global_online_poll_data->yes_vote * 100)/$totalVote);
-                   $totalNoVotePercentage  = floor(($global_online_poll_data->no_vote * 100)/$totalVote);
+                    $totalVote = $onlinePollData->yes_vote + $onlinePollData->no_vote;
+                   $totalYesVotePercentage = floor(($onlinePollData->yes_vote * 100)/$totalVote);
+                   $totalNoVotePercentage  = floor(($onlinePollData->no_vote * 100)/$totalVote);
                 }
 
             @endphp
-            @if(Session::get('current_poll_id') == $global_online_poll_data->id)
+            @if(Session::get('current_poll_id') == $onlinePollData->id)
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <tr>
-                            <td style="width: 100px">Yes ({{$global_online_poll_data->yes_vote}})</td>
+                            <td style="width: 100px">Yes ({{$onlinePollData->yes_vote}})</td>
                             <td>
                                 <div class="progress">
                                     <div class="progress-bar bg-success" role="progressbar" style="width: {{$totalYesVotePercentage}}%" aria-valuenow="{{$totalYesVotePercentage}}" aria-valuemin="0" aria-valuemax="100">
@@ -257,7 +260,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td style="width: 100px">No ({{$global_online_poll_data->no_vote}})</td>
+                            <td style="width: 100px">No ({{$onlinePollData->no_vote}})</td>
                             <td>
                                 <div class="progress">
                                     <div class="progress-bar bg-danger" role="progressbar" style="width: {{$totalNoVotePercentage}}%" aria-valuenow="{{$totalNoVotePercentage}}" aria-valuemin="0" aria-valuemax="100">
@@ -270,9 +273,9 @@
                 <a href="{{ route('previous_poll_result') }}" class="btn btn-primary old" style="margin-top: 0">Old Result</a>
             @endif
 
-            @if(Session::get('current_poll_id') != $global_online_poll_data->id)
+            @if(Session::get('current_poll_id') != $onlinePollData->id)
                 <div class="answer-option">
-                    <form action="{{ route('poll_submit',$global_online_poll_data->id) }}" method="post">
+                    <form action="{{ route('poll_submit',$onlinePollData->id) }}" method="post">
                         @csrf
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="vote" id="poll_id_1" value="yes">
