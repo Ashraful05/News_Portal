@@ -15,7 +15,8 @@ class AdminPhotoController extends Controller
      */
     public function index()
     {
-        $photos = Photo::get();
+        $photos = Photo::with('rLanguage')->get();
+//        return $photos;
         return view('admin.photo.index',compact('photos'));
     }
 
@@ -46,6 +47,7 @@ class AdminPhotoController extends Controller
         $request->file('photo')->move(public_path('uploads/'),$finalName);
         Photo::create([
            'caption'=>$request->caption,
+           'language_id'=>$request->language_id,
            'photo'=>$finalName,
         ]);
         return redirect()->route('photo.index')->with('success','Photo Data Saved Successfully!');
@@ -98,11 +100,13 @@ class AdminPhotoController extends Controller
             $photo->update([
                 'caption'=>$request->caption,
                 'photo'=>$finalName,
+                'language_id'=>$request->language_id,
             ]);
 
         }else{
             $photo->update([
                 'caption'=>$request->caption,
+                'language_id'=>$request->language_id,
             ]);
         }
 

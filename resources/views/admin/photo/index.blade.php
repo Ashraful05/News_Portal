@@ -17,6 +17,7 @@
                                     <th>SL</th>
                                     <th>Photo</th>
                                     <th>Caption</th>
+                                    <th>Caption Language</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -28,6 +29,7 @@
                                             <img src="{{ asset('uploads/'.$data->photo) }}" style="height: 80px;width: 80px;" alt="">
                                         </td>
                                         <td>{{ $data->caption }}</td>
+                                        <td>{{ $data->rLanguage->language_name }}</td>
                                         <td class="pt_10 pb_10">
                                             <a href="{{ route('photo.edit',$data->id) }}" class="btn btn-primary" title="Edit Data"><i class="fas fa-edit"></i></a>
                                             <form action="{{ route('photo.destroy',$data->id) }}" method="post">
