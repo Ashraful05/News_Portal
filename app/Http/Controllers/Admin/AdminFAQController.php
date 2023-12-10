@@ -15,7 +15,7 @@ class AdminFAQController extends Controller
      */
     public function index()
     {
-        $faqData = Faq::get();
+        $faqData = Faq::with('rLanguage')->get();
         return view('admin.faq.index',compact('faqData'));
     }
 
@@ -42,7 +42,8 @@ class AdminFAQController extends Controller
         ]);
         Faq::create([
             'faq_title'=>$request->faq_title,
-            'faq_detail'=>$request->faq_detail
+            'faq_detail'=>$request->faq_detail,
+            'language_id'=>$request->language_id
         ]);
         return redirect()->route('faq.index')->with('success','Data saved successfully!!');
     }
@@ -80,9 +81,10 @@ class AdminFAQController extends Controller
     {
         $faq->update([
            'faq_title'=>$request->faq_title,
-            'faq_detail'=>$request->faq_detail
+            'faq_detail'=>$request->faq_detail,
+            'language_id'=>$request->language_id
         ]);
-        return redirect()->route('admin.faq')->with('success','Data Updated Successfully!');
+        return redirect()->route('faq.index')->with('success','Data Updated Successfully!');
     }
 
     /**

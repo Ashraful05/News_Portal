@@ -30,8 +30,16 @@ class FrontPageController extends Controller
     public function faqPage()
     {
         Helpers::read_json();
+        if(!session()->get('session_short_name')){
+            $current_short_name = Language::where('is_default','yes')->first()->language_short_name;
+        }else{
+            $current_short_name = session()->get('session_short_name');
+        }
+
+        $currentLanguageId = Language::where('language_short_name',$current_short_name)->first()->id;
+
         $pageData = Page::where('id',1)->first();
-        $faqData = Faq::get();
+        $faqData = Faq::where('language_id',$currentLanguageId)->get();
         return view('frontend.faq',compact('pageData','faqData'));
     }
     public function termsPage()

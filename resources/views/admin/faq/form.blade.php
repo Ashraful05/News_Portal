@@ -31,6 +31,26 @@
                                                 <input type="text" name="faq_title" value="{{ old('faq_title',$faq->faq_title) }}" class="form-control">
                                             </div>
                                         </div>
+                                        @if($faq->exists)
+                                            <div class="form-group mb-3">
+                                                <label for="">FAQ Language</label>
+                                                <select name="language_id" id="" class="form-control">
+                                                    @foreach($global_language_data as $data)
+                                                        <option value="{{ $data->id }}" @if($data->id == $faq->language_id) selected @endif>{{ $data->language_name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        @else
+                                            <div class="form-group mb-3">
+                                                <label for="">FAQ Language</label>
+                                                <select name="language_id" id="" class="form-control">
+                                                    <option value="" selected disabled>Select a Language</option>
+                                                    @foreach($global_language_data as $data)
+                                                        <option value="{{ $data->id }}">{{ $data->language_name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        @endif
                                         <div class="form-group mb-3">
                                             <label for="">FAQ Detail</label>
                                             <div>

@@ -16,6 +16,7 @@
                                 <tr>
                                     <th>SL</th>
                                     <th>FAQ Title</th>
+                                    <th>FAQ Language</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -24,6 +25,7 @@
                                     <tr>
                                         <td>{{ ++$row }}</td>
                                         <td>{{ $data->faq_title }}</td>
+                                        <td>{{ $data->rLanguage->language_name }}</td>
                                         <td class="pt_10 pb_10">
                                             <a href="{{ route('faq.edit',$data->id) }}" class="btn btn-primary" title="Edit Data"><i class="fas fa-edit"></i></a>
                                             <form action="{{ route('faq.destroy',$data->id) }}" method="post">
