@@ -37,6 +37,26 @@
                                                 <input type="text" name="caption" value="{{ old('caption',$video->caption) }}" class="form-control">
                                             </div>
                                         </div>
+                                        @if($video->exists)
+                                            <div class="form-group mb-3">
+                                                <label for="">SubCategory Language</label>
+                                                <select name="language_id" id="" class="form-control">
+                                                    @foreach($global_language_data as $data)
+                                                        <option value="{{ $data->id }}" @if($data->id == $video->language_id) selected @endif>{{ $data->language_name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        @else
+                                            <div class="form-group mb-3">
+                                                <label for="">SubCategory Language</label>
+                                                <select name="language_id" id="" class="form-control">
+                                                    <option value="" selected disabled>Select a Language</option>
+                                                    @foreach($global_language_data as $data)
+                                                        <option value="{{ $data->id }}">{{ $data->language_name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

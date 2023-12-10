@@ -15,7 +15,7 @@ class AdminVideoController extends Controller
      */
     public function index()
     {
-        $videos = Video::get();
+        $videos = Video::with('rLanguage')->get();
         return view('admin.videos.index',compact('videos'));
     }
 
@@ -43,7 +43,8 @@ class AdminVideoController extends Controller
         ]);
         Video::create([
            'video_id'=>$request->video_id,
-           'caption'=>$request->caption
+           'caption'=>$request->caption,
+            'language_id'=>$request->language_id
         ]);
         return redirect()->route('video.index')->with('success','Data saved successfully!!');
     }
@@ -81,7 +82,8 @@ class AdminVideoController extends Controller
     {
         $video->update([
             'video_id'=>$request->video_id,
-            'caption'=>$request->caption
+            'caption'=>$request->caption,
+            'language_id'=>$request->language_id
         ]);
         return redirect()->route('video.index')->with('success','Video Data Updated');
     }

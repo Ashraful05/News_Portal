@@ -17,6 +17,7 @@
                                     <th>SL</th>
                                     <th>Video</th>
                                     <th>Caption</th>
+                                    <th>Caption Language</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -33,6 +34,7 @@
                                             </iframe>
                                         </td>
                                         <td>{{ $data->caption }}</td>
+                                        <td>{{ $data->rLanguage->language_name }}</td>
                                         <td class="pt_10 pb_10">
                                             <a href="{{ route('video.edit',$data->id) }}" class="btn btn-primary" title="Edit Data"><i class="fas fa-edit"></i></a>
                                             <form action="{{ route('video.destroy',$data->id) }}" method="post">

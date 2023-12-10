@@ -4,9 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Lang;
 
 class Video extends Model
 {
     use HasFactory;
     protected $guarded=[];
+
+    public function rLanguage()
+    {
+        return $this->belongsTo(Language::class,'language_id','id');
+    }
 }
