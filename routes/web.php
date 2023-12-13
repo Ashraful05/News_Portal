@@ -93,6 +93,8 @@ Route::get('archive/{year}/{month}',[FrontArchiveController::class,'showArchiveW
 Route::get('tag/{tag_name}',[FrontTagController::class,'tagWisePost'])->name('show_tag_post');
 Route::post('language/switch',[FrontLanguageController::class,'frontLanguageSwitch'])->name('front_language_switch');
 
+
+
 //admin routes.........
 Route::controller(AdminController::class)->prefix('admin')->group(function(){
     Route::get('login','AdminLogin')->name('admin_login');

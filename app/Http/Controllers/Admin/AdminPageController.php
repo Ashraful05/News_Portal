@@ -11,6 +11,7 @@ class AdminPageController extends Controller
    public function editAboutPage()
    {
        $data = Page::where('id',1)->first();
+//       $data = Page::with('rLanguage')->get();
        return view('admin.pages.about_page',compact('data'));
    }
    public function updateAboutPage(Request $request)

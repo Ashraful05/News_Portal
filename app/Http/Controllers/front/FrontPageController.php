@@ -39,7 +39,7 @@ class FrontPageController extends Controller
         $currentLanguageId = Language::where('language_short_name',$current_short_name)->first()->id;
 
         $pageData = Page::where('id',1)->first();
-        $faqData = Faq::where('language_id',$currentLanguageId)->get();
+        $faqData = Faq::where('language_id',$currentLanguageIdPage)->get();
         return view('frontend.faq',compact('pageData','faqData'));
     }
     public function termsPage()

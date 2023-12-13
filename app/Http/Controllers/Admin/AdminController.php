@@ -5,6 +5,15 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Mail\Websitemail;
 use App\Models\Admin;
+use App\Models\Category;
+use App\Models\Faq;
+use App\Models\LiveChannel;
+use App\Models\NewsPosts;
+use App\Models\OnlinePoll;
+use App\Models\Photo;
+use App\Models\SubCategory;
+use App\Models\Subscriber;
+use App\Models\Video;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -66,7 +75,17 @@ class AdminController extends Controller
     }
     public function Index()
     {
-        return view('admin.home');
+        $totalCategories = Category::count();
+        $totalNews = NewsPosts::count();
+        $subCategories = SubCategory::count();
+        $totalPhotos = Photo::count();
+        $totalVideos = Video::count();
+        $totalFaq = Faq::count();
+        $totalPoll = OnlinePoll::count();
+        $totalSubscribers = Subscriber::where('status','active')->count();
+        $totalChannel = LiveChannel::count();
+        return view('admin.home',compact('totalCategories','totalNews','subCategories',
+            'totalPhotos','totalVideos','totalFaq','totalPoll','totalSubscribers','totalChannel'));
     }
     public function ResetPassword($token,$email)
     {

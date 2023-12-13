@@ -15,7 +15,7 @@
                             <div class="form-group mb-3">
                                 <label>About Title</label>
                                 <div>
-                                    <input type="text" name="about_title" value="{{ value($data->about_title) }}" class="form-control">
+                                    <input type="text" name="about_title" value="{{ $data->about_title }}" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group mb-3">
