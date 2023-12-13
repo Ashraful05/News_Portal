@@ -95,6 +95,7 @@ class AuthorPostController extends Controller
         }
         $post = NewsPosts::findOrFail($id);
         $subCategories = SubCategory::with('rCategory')->get();
+//        return $subCategories;
         $existing_tags = Tag::where('post_id',$post->id)->get();
         return view('author.post_edit',compact('post','subCategories','existing_tags'));
     }
@@ -122,6 +123,7 @@ class AuthorPostController extends Controller
                 'post_detail'=>$request->post_detail,
                 'is_share'=>$request->is_share,
                 'is_comment'=>$request->is_comment,
+                'language_id'=>$request->language_id
             ]);
         }else{
             $newspost->update([
@@ -133,6 +135,7 @@ class AuthorPostController extends Controller
 //                'admin_id'=>Auth::guard('admin')->user()->id,
                 'is_share'=>$request->is_share,
                 'is_comment'=>$request->is_comment,
+                'language_id'=>$request->language_id
             ]);
         }
         if(!empty($request->tags)){

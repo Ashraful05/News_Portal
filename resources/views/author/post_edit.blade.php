@@ -7,7 +7,7 @@
     <a href="{{ route('author_post_view') }}" class="btn btn-primary"><i class="fas fa-eye"></i>View</a>
 @endsection
 @section('main_content')
-{{--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>--}}
+    {{--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>--}}
     <div class="section-body">
 
         <form action="{{ route('author_post_update',$post->id) }}" method="post" enctype="multipart/form-data">
@@ -33,6 +33,26 @@
                                     <input type="text" name="post_title" value="{{ $post->post_title }}" class="form-control">
                                 </div>
                             </div>
+                            @if($subCategories!=null)
+                                <div class="form-group mb-3">
+                                    <label for="">SubCategory Language</label>
+                                    <select name="language_id" id="" class="form-control">
+                                        @foreach($global_language_data as $data)
+                                            <option value="{{ $data->id }}" @if($data->id == $post->language_id) selected @endif>{{ $data->language_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            @else
+                                <div class="form-group mb-3">
+                                    <label for="">SubCategory Language</label>
+                                    <select name="language_id" id="" class="form-control">
+                                        @foreach($global_language_data as $data)
+                                            <option value="{{ $data->id }}">{{ $data->language_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            @endif
+
                             <div class="form-group mb-3">
                                 <label>Post Details</label>
                                 <div>
@@ -68,12 +88,12 @@
                                 <label for="">Existing Tags</label>
                                 <table class="table table-bordered">
                                     @foreach($existing_tags as $tag)
-                                    <tr>
-                                        <td>{{ $tag->tag_name }}</td>
-                                        <td>
-                                            <a href="{{ route('author_post_delete_tag', [$tag->id,$post->id]) }}" onClick="return confirm('Are you sure?');">Delete</a>
-                                        </td>
-                                    </tr>
+                                        <tr>
+                                            <td>{{ $tag->tag_name }}</td>
+                                            <td>
+                                                <a href="{{ route('author_post_delete_tag', [$tag->id,$post->id]) }}" onClick="return confirm('Are you sure?');">Delete</a>
+                                            </td>
+                                        </tr>
                                     @endforeach
                                 </table>
                             </div>

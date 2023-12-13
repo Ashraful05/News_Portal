@@ -15,6 +15,7 @@
                                 <thead>
                                 <tr>
                                     <th>SL</th>
+                                    <th>Post Language</th>
                                     <th>Post Image</th>
                                     <th>Post Title</th>
                                     <th>Post Category</th>
@@ -27,6 +28,7 @@
                                 @foreach($posts as $row => $data)
                                     <tr>
                                         <td>{{ ++$row }}</td>
+                                        <td>{{ $data->rLanguage->language_name }}</td>
                                         @if($data->post_photo)
                                             <td>
                                                 <img src="{{ asset('uploads/'.$data->post_photo) }}" style="height: 100px;width: 100px;" alt="">

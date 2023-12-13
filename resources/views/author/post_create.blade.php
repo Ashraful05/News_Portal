@@ -7,7 +7,7 @@
     <a href="{{ route('author_post_view') }}" class="btn btn-primary"><i class="fas fa-eye"></i>View</a>
 @endsection
 @section('main_content')
-{{--        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>--}}
+    {{--        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>--}}
     <div class="section-body">
 
         <form action="{{ route('author_post_save') }}" method="post" enctype="multipart/form-data">
@@ -27,6 +27,16 @@
                                     @endforeach
                                 </select>
                             </div>
+
+                            <div class="form-group mb-3">
+                                <label for="">SubCategory Language</label>
+                                <select name="language_id" id="" class="form-control">
+                                    @foreach($global_language_data as $data)
+                                        <option value="{{ $data->id }}">{{ $data->language_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
                             <div class="form-group mb-3">
                                 <label>Post Title</label>
                                 <div>
@@ -39,42 +49,42 @@
                                     <textarea name="post_detail" id="" cols="30" rows="10" class="form-control snote"> </textarea>
                                 </div>
                             </div>
-                                <div class="form-group mb-3">
-                                    <label>Is Shareable?</label>
-                                    <select name="is_share" class="form-control">
-                                        <option value="1" >Yes</option>
-                                        <option value="0" >No</option>
-                                    </select>
-                                </div>
+                            <div class="form-group mb-3">
+                                <label>Is Shareable?</label>
+                                <select name="is_share" class="form-control">
+                                    <option value="1" >Yes</option>
+                                    <option value="0" >No</option>
+                                </select>
+                            </div>
 
 
-                                <div class="form-group mb-3">
-                                    <label>Is Comment?</label>
-                                    <select name="is_comment" class="form-control">
-                                        <option value="1">Yes</option>
-                                        <option value="0">No</option>
-                                    </select>
-                                </div>
+                            <div class="form-group mb-3">
+                                <label>Is Comment?</label>
+                                <select name="is_comment" class="form-control">
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
 
-                                <div class="form-group mb-3">
-                                    <label>Want to send this to subscribers?</label>
-                                    <select name="subscriber_send_option" class="form-control">
-                                        <option value="1">Yes</option>
-                                        <option value="0">No</option>
-                                    </select>
-                                </div>
+                            <div class="form-group mb-3">
+                                <label>Want to send this to subscribers?</label>
+                                <select name="subscriber_send_option" class="form-control">
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
 
-                                <div class="form-group mb-3">
-                                    <label for="">New Tags</label>
+                            <div class="form-group mb-3">
+                                <label for="">New Tags</label>
+                                <input type="text" class="form-control" name="tags">
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label>Tags</label>
+                                <div>
                                     <input type="text" class="form-control" name="tags">
                                 </div>
-
-                                <div class="form-group mb-3">
-                                    <label>Tags</label>
-                                    <div>
-                                        <input type="text" class="form-control" name="tags">
-                                    </div>
-                                </div>
+                            </div>
 
                             <input type="hidden" name="old_image" value="">
                             <div class="row col-6">
