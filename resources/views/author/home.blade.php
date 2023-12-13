@@ -10,25 +10,10 @@
                 </div>
                 <div class="card-wrap">
                     <div class="card-header">
-                        <h4>Total Active News</h4>
+                        <h4>Total News By Author</h4>
                     </div>
                     <div class="card-body">
-                        12
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-            <div class="card card-statistic-1">
-                <div class="card-icon bg-danger">
-                    <i class="fas fa-book-open"></i>
-                </div>
-                <div class="card-wrap">
-                    <div class="card-header">
-                        <h4>Total Pending News</h4>
-                    </div>
-                    <div class="card-body">
-                        122
+                        {{$totalNews}}
                     </div>
                 </div>
             </div>

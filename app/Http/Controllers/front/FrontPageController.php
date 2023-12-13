@@ -9,6 +9,7 @@ use App\Models\Admin;
 use App\Models\Author;
 use App\Models\Faq;
 use App\Models\Language;
+use App\Models\NewsPosts;
 use App\Models\OnlinePoll;
 use App\Models\Page;
 use Illuminate\Http\Request;
@@ -86,7 +87,8 @@ class FrontPageController extends Controller
     public function authorHome()
     {
         Helpers::read_json();
-        return view('author.home');
+        $totalNews = NewsPosts::where('author_id',Auth::guard('author')->user()->id)->count();
+        return view('author.home',compact('totalNews'));
     }
     public function authorProfileEdit()
     {
